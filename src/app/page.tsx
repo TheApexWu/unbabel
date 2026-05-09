@@ -1,7 +1,21 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { NEIGHBORHOODS } from "@/lib/neighborhoods";
 
 export default function Home() {
+  const [stats, setStats] = useState<
+    Record<string, { posts: number; languages: number }>
+  >({});
+
+  useEffect(() => {
+    fetch("/api/stats")
+      .then((r) => r.json())
+      .then((data) => setStats(data.stats ?? {}))
+      .catch(() => {});
+  }, []);
+
   return (
     <main className="max-w-2xl mx-auto px-4 py-12">
       <div className="text-center mb-10">
@@ -21,17 +35,25 @@ export default function Home() {
           pick your neighborhood
         </h2>
         <div className="space-y-1">
-          {NEIGHBORHOODS.map((hood) => (
-            <div key={hood.slug} className="flex items-baseline gap-2">
-              <Link
-                href={`/${hood.slug}`}
-                className="text-purple-800 hover:text-purple-600 underline text-sm"
-              >
-                {hood.name}
-              </Link>
-              <span className="text-xs text-gray-400">{hood.borough}</span>
-            </div>
-          ))}
+          {NEIGHBORHOODS.map((hood) => {
+            const s = stats[hood.slug];
+            return (
+              <div key={hood.slug} className="flex items-baseline gap-2">
+                <Link
+                  href={`/${hood.slug}`}
+                  className="text-purple-800 hover:text-purple-600 underline text-sm"
+                >
+                  {hood.name}
+                </Link>
+                <span className="text-xs text-gray-400">{hood.borough}</span>
+                {s && s.posts > 0 && (
+                  <span className="text-xs text-gray-400 ml-auto">
+                    {s.posts} posts / {s.languages} lang
+                  </span>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 

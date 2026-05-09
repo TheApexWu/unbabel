@@ -16,7 +16,7 @@ interface DirectoryEntry {
   source: string;
 }
 
-const CATEGORIES = ["all", "food", "services", "community", "nightlife"];
+const CATEGORIES = ["all", "food", "services", "community", "health", "nightlife"];
 
 export default function DirectoryPage() {
   const params = useParams();
