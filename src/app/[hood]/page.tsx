@@ -3,11 +3,20 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { NEIGHBORHOODS, getAdjacentSlugs } from "@/lib/neighborhoods";
+import { NEIGHBORHOODS, getAdjacentSlugs, SUPPORTED_LANGUAGES } from "@/lib/neighborhoods";
 import { PostCard } from "@/components/PostCard";
 import { SignalCard } from "@/components/SignalCard";
 import { LanguagePicker } from "@/components/LanguagePicker";
 import { PostForm } from "@/components/PostForm";
+
+function detectLang(): string {
+  if (typeof navigator === "undefined") return "en";
+  const raw = navigator.language || "en";
+  const prefix = raw.split("-")[0].toLowerCase();
+  const supported = SUPPORTED_LANGUAGES.map((l) => l.code);
+  if (supported.includes(prefix)) return prefix;
+  return "en";
+}
 
 interface Post {
   id: number;
@@ -38,12 +47,26 @@ interface Signal {
   posts?: SignalPost[];
 }
 
+interface CrossHoodSignal {
+  entity_value: string;
+  entity_type: string;
+  hood_count: number;
+  post_count: number;
+  hoods: string;
+  languages: string;
+}
+
 export default function HoodFeed() {
   const params = useParams();
   const hood = params.hood as string;
   const [posts, setPosts] = useState<Post[]>([]);
   const [signals, setSignals] = useState<Signal[]>([]);
+  const [crossHoodSignals, setCrossHoodSignals] = useState<CrossHoodSignal[]>([]);
   const [viewerLang, setViewerLang] = useState("en");
+
+  useEffect(() => {
+    setViewerLang(detectLang());
+  }, []);
   const [viewerAlias, setViewerAlias] = useState<string | undefined>();
   const [loading, setLoading] = useState(true);
   const [showRawReports, setShowRawReports] = useState(false);
@@ -65,6 +88,7 @@ export default function HoodFeed() {
       const signalData = await signalRes.json();
       setPosts(feedData.posts ?? []);
       setSignals(signalData.signals ?? []);
+      setCrossHoodSignals(signalData.crossHoodSignals ?? []);
     } catch {
       setPosts([]);
     } finally {
@@ -151,7 +175,7 @@ export default function HoodFeed() {
             </span>
           </div>
           {signals.map((signal) => (
-            <SignalCard key={signal.entity_value} signal={signal} />
+            <SignalCard key={signal.entity_value} signal={signal} hood={hood} />
           ))}
         </div>
       ) : (
@@ -160,6 +184,73 @@ export default function HoodFeed() {
           <p className="text-gray-400 text-xs">
             when multiple languages mention the same person, place, or issue, it surfaces here.
           </p>
+        </div>
+      )}
+
+      {/* Cross-neighborhood signals */}
+      {!loading && crossHoodSignals.length > 0 && (
+        <div className="space-y-4 mb-8">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-xs text-red-600 font-mono uppercase tracking-wide font-bold">
+              cross-neighborhood patterns
+            </span>
+            <span className="text-xs text-red-400 font-mono">
+              {crossHoodSignals.length} city-level
+            </span>
+          </div>
+          {crossHoodSignals.map((signal) => {
+            const hoods = signal.hoods.split(",");
+            const langs = signal.languages.split(",");
+            return (
+              <div
+                key={signal.entity_value}
+                className="border-2 border-rose-500 bg-rose-50 font-mono text-sm"
+              >
+                <div className="p-4">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="bg-rose-500 text-white text-xs font-bold px-2 py-0.5">
+                      CITY-LEVEL SIGNAL
+                    </span>
+                    <span className="bg-rose-100 text-rose-800 text-xs font-bold px-2 py-0.5">
+                      {signal.hood_count} neighborhoods
+                    </span>
+                    <span className="text-xs text-rose-700">
+                      [{signal.entity_type}]
+                    </span>
+                    <span className="ml-auto text-xs text-rose-600">
+                      {signal.post_count} reports
+                    </span>
+                  </div>
+                  <p className="text-rose-900 font-bold text-base mb-2">
+                    {signal.entity_value}
+                  </p>
+                  <p className="text-xs text-rose-700 mb-2">
+                    Reported across {signal.hood_count} neighborhoods. This is not a local issue -- it is a city-level pattern.
+                  </p>
+                  <div className="flex gap-2 flex-wrap mb-2">
+                    {hoods.map((h) => (
+                      <span
+                        key={h}
+                        className="text-xs border border-rose-300 bg-white px-2 py-0.5 text-rose-800"
+                      >
+                        {h.replace(/-/g, " ")}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex gap-2 flex-wrap">
+                    {langs.map((lang) => (
+                      <span
+                        key={lang}
+                        className="text-xs border border-rose-200 bg-rose-100 px-2 py-0.5 text-rose-700"
+                      >
+                        {lang}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       )}
 

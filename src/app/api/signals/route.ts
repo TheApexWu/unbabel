@@ -1,4 +1,4 @@
-import { getSignalClusters, getPostsByIds } from "@/lib/db";
+import { getSignalClusters, getPostsByIds, getCrossHoodSignals } from "@/lib/db";
 import { getAdjacentSlugs } from "@/lib/neighborhoods";
 
 export async function GET(request: Request) {
@@ -6,7 +6,7 @@ export async function GET(request: Request) {
   const hood = searchParams.get("hood") ?? "";
 
   if (!hood) {
-    return Response.json({ signals: [] });
+    return Response.json({ signals: [], crossHoodSignals: [] });
   }
 
   const adjacent = getAdjacentSlugs(hood);
@@ -32,5 +32,12 @@ export async function GET(request: Request) {
       .filter(Boolean),
   }));
 
-  return Response.json({ signals: enriched });
+  // Cross-hood signals: entities appearing in 2+ different neighborhoods
+  const allCrossHood = getCrossHoodSignals();
+  // Filter to only those touching the current hood
+  const crossHoodSignals = allCrossHood.filter((s) =>
+    s.hoods.split(",").includes(hood)
+  );
+
+  return Response.json({ signals: enriched, crossHoodSignals });
 }
