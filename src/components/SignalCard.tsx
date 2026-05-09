@@ -217,9 +217,9 @@ export function SignalCard({ signal, hood, viewerLang = "en", defaultExpanded = 
                   {post.hood.replace(/-/g, " ")}
                 </span>
               </div>
-              <p className="text-gray-800">{post.body_original}</p>
+              <p className="text-gray-800">{translations[post.id] || post.body_original}</p>
               {translations[post.id] && (
-                <p className="text-gray-500 text-[11px] mt-1 italic">{translations[post.id]}</p>
+                <p className="text-gray-400 text-[11px] mt-1 italic">{post.body_original}</p>
               )}
             </div>
           ))}
