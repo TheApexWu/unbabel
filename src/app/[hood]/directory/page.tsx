@@ -5,11 +5,13 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { NEIGHBORHOODS } from "@/lib/neighborhoods";
 import { DirectoryCard } from "@/components/DirectoryCard";
+import { LanguagePicker } from "@/components/LanguagePicker";
 
 interface DirectoryEntry {
   id: number;
   name: string;
   description_original: string | null;
+  source_lang: string | null;
   category: string | null;
   hood: string;
   address: string | null;
@@ -23,6 +25,7 @@ export default function DirectoryPage() {
   const hood = params.hood as string;
   const [entries, setEntries] = useState<DirectoryEntry[]>([]);
   const [category, setCategory] = useState("all");
+  const [viewerLang, setViewerLang] = useState("en");
   const [loading, setLoading] = useState(true);
 
   const neighborhood = NEIGHBORHOODS.find((n) => n.slug === hood);
@@ -49,13 +52,20 @@ export default function DirectoryPage() {
 
   return (
     <main className="max-w-2xl mx-auto px-4 py-6">
-      <div className="mb-4 border-b border-gray-300 pb-3">
-        <Link href="/" className="text-xs text-gray-400 hover:text-purple-800">
-          &larr; all neighborhoods
-        </Link>
-        <h1 className="text-2xl font-bold text-purple-800" style={{ fontFamily: "Georgia, serif" }}>
-          {neighborhood.name}
-        </h1>
+      <div className="flex items-center justify-between mb-4 border-b border-gray-300 pb-3">
+        <div>
+          <Link href="/" className="text-xs text-gray-400 hover:text-purple-800">
+            &larr; all neighborhoods
+          </Link>
+          <h1 className="text-2xl font-bold text-purple-800" style={{ fontFamily: "Georgia, serif" }}>
+            {neighborhood.name}
+          </h1>
+          <span className="text-xs text-gray-400">{neighborhood.borough}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-gray-400">reading in:</span>
+          <LanguagePicker current={viewerLang} onChange={setViewerLang} />
+        </div>
       </div>
 
       {/* Nav */}
@@ -69,7 +79,7 @@ export default function DirectoryPage() {
       </div>
 
       {/* Category tabs */}
-      <div className="flex gap-2 mb-4">
+      <div className="flex gap-2 mb-4 flex-wrap">
         {CATEGORIES.map((cat) => (
           <button
             key={cat}
@@ -93,7 +103,11 @@ export default function DirectoryPage() {
           <p className="text-gray-400 text-sm">no listings yet.</p>
         ) : (
           entries.map((entry) => (
-            <DirectoryCard key={entry.id} entry={entry} />
+            <DirectoryCard
+              key={entry.id}
+              entry={entry}
+              viewerLang={viewerLang}
+            />
           ))
         )}
       </div>
