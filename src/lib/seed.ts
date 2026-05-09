@@ -677,17 +677,75 @@ export function seedDatabase() {
     53: "Don't sign anything at the realty office on 37th Ave. They add extra fees after you sign.",
   };
 
-  // Spanish translations for English seed posts
+  // Spanish translations for ALL non-Spanish seed posts
   const SEED_TRANSLATIONS_ES: Record<number, string> = {
+    1: "Nuevo restaurante de momos abrio en Roosevelt, muy rico, vayan a probarlo",
     2: "NO firmen nada en la oficina de bienes raices en la 37th Ave. Agregan cargos despues de firmar y dicen que estaba en el contrato. Le paso a dos personas de mi edificio.",
-    8: "El mecanico en Bowne St es honesto. Me cobro $300 por los frenos, otro lugar queria $800. Pregunten por Mike, el te explica lo que esta haciendo.",
-    12: "Clinica legal de inmigracion gratis todos los jueves en el sotano de St. Joan of Arc en la 181. Sin cita, sin identificacion. Hablan espanol, hindi, urdu.",
-    17: "Si alguien necesita botas de trabajo o equipo de seguridad barato, la tienda de excedentes en la 4th Ave tiene buenas cosas. No hacen preguntas y aceptan efectivo.",
-    18: "El alquiler subio $400 y mi casero no arregla la calefaccion. La organizacion de derechos de inquilinos en Myrtle me ayudo a presentar una queja gratis. Pregunten por Maria.",
-    20: "La nevera comunitaria en Willoughby todavia se esta llenando? Puedo traer verduras extra los sabados si alguien coordina.",
-    25: "Alguien conoce un buen abogado de inmigracion por aqui? Necesito renovar mi permiso de trabajo y el de Broadway me cobro $3000, me parece una locura.",
-    29: "La biblioteca en la 104 tiene preparacion de impuestos gratis todos los sabados hasta abril. Hablan espanol y mandarin. No necesitas cita.",
+    3: "La nueva tienda en la 74 tiene cosas muy baratas. Tambien dan planes de telefono sin SSN.",
+    5: "El nuevo lugar de dumplings es mejor que Old Sichuan. La duena es de Fujian y ayuda a traducir documentos gratis.",
+    6: "El senor de la lavanderia en Main Street te ayuda a corregir tu curriculum. Pides cuando dejas la ropa. Muy buena persona.",
+    7: "La biblioteca tiene clases gratis de preparacion para el examen de ciudadania los sabados. Tambien practican ingles para entrevistas. Lleguen temprano.",
+    8: "El mecanico en Bowne St es honesto. Me cobro $300 por los frenos, otro lugar queria $800. Pregunten por Mike.",
+    9: "Busco donde dejar a mi hijo. No tiene que ser guarderia formal, alguien de confianza esta bien.",
+    12: "Clinica legal de inmigracion gratis todos los jueves en St. Joan of Arc en la 181. Sin cita, sin identificacion.",
+    17: "Si alguien necesita botas de trabajo o equipo barato, la tienda en la 4th Ave tiene buenas cosas. Aceptan efectivo.",
+    18: "El alquiler subio $400 y mi casero no arregla la calefaccion. La organizacion en Myrtle me ayudo a presentar queja gratis. Pregunten por Maria.",
+    20: "La nevera comunitaria en Willoughby todavia se llena? Puedo traer verduras los sabados si alguien coordina.",
+    22: "El souvlaki en Ditmars es el mejor. El senor que lo hace es de Thessaloniki. Vamos todos los sabados.",
+    23: "El nuevo cafe egipcio en Steinway tiene shisha y comida casera. Precios razonables y buen ambiente.",
+    24: "El salon brasileno en la 30th Ave hace cejas por $10 y la duena ayuda con traduccion de documentos.",
+    25: "Alguien conoce buen abogado de inmigracion? Necesito renovar permiso de trabajo y en Broadway me cobraron $3000.",
+    27: "Alguien sabe donde aprender ingles gratis cerca de Corona? Acabo de llegar hace dos meses, no entiendo nada.",
+    29: "La biblioteca en la 104 tiene preparacion de impuestos gratis los sabados. Hablan espanol y mandarin.",
+    30: "La alcapurria de la senora en la 116 y Lexington es la mejor del barrio. Lleguen antes del mediodia.",
     31: "El apartamento de renta estabilizada en la 118 subio $200 y dicen que es legal. Es verdad? A quien llamo?",
+    32: "La clinica en la 117 y la 3ra atiende sin seguro. Hablan espanol y no piden papeles.",
+    33: "Busco alguien que hable frances en el barrio. Acabo de llegar de Senegal y no conozco a nadie.",
+    // Bengali
+    34: "La nueva tienda en la 74 tiene cosas muy baratas. Tambien dan planes de telefono sin SSN.",
+    35: "No firmen nada en la oficina de bienes raices en la 37th Ave. Agregan cargos extra despues de firmar.",
+    36: "Alguien sabe donde hay clases de ingles gratis? Acabo de llegar, no entiendo nada.",
+    37: "Alguien conoce buen abogado de inmigracion en Astoria? Necesito renovar mi permiso de trabajo.",
+    // Tagalog
+    38: "El dentista en Roosevelt Ave es barato, $80 la limpieza. Muy bueno, no importa si no hablas ingles.",
+    39: "Cuidado con la oficina de bienes raices en la 37th Ave. Hay cargos ocultos despues de firmar. Le paso a mi vecino.",
+    40: "Hay clases de ingles gratis en la iglesia los sabados. Aceptan cualquier idioma. Muy buena ensenanza.",
+    41: "La nevera comunitaria en Willoughby siempre esta llena. Yo llevo verduras los sabados. Si quieres ayudar, solo ve.",
+    // Russian
+    42: "La biblioteca de Flushing tiene cursos de ingles gratis y ayuda con documentos de ciudadania. El personal habla ruso.",
+    43: "El mecanico en Bowne St es honesto. Cobro $300 por frenos, otros pedian $800. Pregunten por Mike.",
+    44: "El alquiler subio $400 y el casero no arregla nada. Alguien sabe donde quejarse sin problemas?",
+    45: "En la 8th Avenue hay una asociacion china que ayuda con trabajo y traduccion de documentos gratis. No solo para chinos.",
+    // Hindi
+    46: "El dentista en Roosevelt Ave es muy barato, $80 limpieza. Muy bueno, no importa si no hablas ingles.",
+    // Arabic
+    47: "El abogado de inmigracion en Broadway cobra $3000 para renovar permiso de trabajo. Es demasiado. Alguien conoce uno mas barato?",
+    48: "El alquiler subio $400 y el dueno no arregla nada. Dos semanas sin agua caliente. Donde me quejo?",
+    // French
+    49: "La clinica en la calle 117 acepta pacientes sin seguro. Hablan espanol y un poco de frances. No piden papeles.",
+    50: "El alquiler subio $200 y dicen que es legal. Alguien conoce un abogado gratis para inquilinos?",
+    51: "Hay clases de ingles gratis en la iglesia de la calle 181. Mi esposa fue y dice que son muy buenas.",
+    // Korean
+    52: "La biblioteca de Flushing tiene clases gratis de preparacion para ciudadania. Ruso, chino, coreano. Sabados por la manana.",
+    // Nepali
+    53: "No vayan a la oficina de bienes raices en la 37th Ave. Agregan cargos despues de firmar.",
+    // Elmhurst
+    54: "El alquiler en Elmhurst subio $300 y el casero no arregla nada. Alguien sabe donde quejarse?",
+    55: "Abrieron una clase de ESL gratis en Broadway, miercoles y viernes por la noche. El profesor es muy paciente.",
+    56: "La iglesia cerca de Queens Center Mall tiene clases de ingles gratis lunes y miercoles. Para recien llegados.",
+    57: "El casero de Elmhurst no arregla nada. Varios inquilinos tienen el mismo problema. Alguien conoce organizacion de inquilinos?",
+    // Chinatown
+    59: "El abogado de inmigracion en Chinatown ayuda con permisos de trabajo y green cards. Habla chino. Sin cita.",
+    60: "La oficina de traduccion en Canal Street traduce documentos a buen precio. Tambien ayudan a llenar formularios.",
+    // Brighton Beach
+    61: "El taller de Brighton Beach cobra demasiado. $800 por frenos, en otro lugar $300.",
+    62: "El centro comunitario de Brighton Beach tiene consultas legales gratis. Ayudan con alquiler, inmigracion y trabajo.",
+    63: "El alquiler subio mucho y el casero no arregla la calefaccion. Alguien sabe como quejarse?",
+    // Fordham
+    64: "Hay una clinica gratis en la Grand Concourse. Sin seguro. Hablan espanol. No piden papeles.",
+    65: "Consulta legal gratis en Fordham Road los martes. Inmigracion, vivienda, derechos laborales. Sin cita.",
+    66: "El alquiler subio $300 y la casa necesita reparaciones. En Fordham Road hay ayuda gratis para inquilinos.",
+    67: "Cuidado con la farmacia nueva en la Grand Concourse, cobran de mas. Mejor ir a la de Kingsbridge.",
   };
 
   // Insert pre-baked translations
