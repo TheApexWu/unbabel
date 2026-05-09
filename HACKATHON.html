@@ -45,7 +45,7 @@
     padding: 16px 20px;
     margin: 16px 0;
   }
-  .zhang-box h3 { margin-top: 0; color: #d35400; }
+  .zhang-box h3 { margin-top: 0; color: #d35400; font-size: 16px; }
   .oneliner { background: #f9f9f9; border-left: 4px solid #333; padding: 8px 16px; margin: 12px 0; }
   a { color: #2c3e50; }
 </style>
@@ -53,7 +53,7 @@
 <body>
 
 <h1>UnBabel -- Build for the Border Hackathon</h1>
-<p class="timestamp">Generated: May 9 2026 | Last content update: May 9 2026, 2:15 PM ET</p>
+<p class="timestamp">Generated: May 9 2026 | Last content update: May 9 2026, 3:45 PM ET</p>
 
 <hr>
 
@@ -112,7 +112,7 @@
 
 <hr>
 
-<h2>What's Built (as of 2:15 PM May 9)</h2>
+<h2>What's Built (as of 3:45 PM May 9)</h2>
 
 <h3>Architecture</h3>
 
@@ -130,7 +130,7 @@
 <h3>Current Stats</h3>
 
 <ul>
-<li>8 neighborhoods, 54 seed posts, 23 directory entries</li>
+<li>12 neighborhoods, 68 seed posts, 23 directory entries</li>
 <li>13 languages: EN, ES, ZH, KO, RU, BN, HI, AR, TL, NE, EL, PT, FR</li>
 <li>10+ active signal clusters in Jackson Heights alone</li>
 <li>"free esl" signal: 6 languages, 8 independent reports</li>
@@ -140,10 +140,11 @@
 
 <table>
 <tr><th>Route</th><th>What it does</th></tr>
-<tr><td><span class="inline-code">/</span></td><td>Homepage. Craigslist-style neighborhood links with post/language counts.</td></tr>
-<tr><td><span class="inline-code">/[hood]</span></td><td><strong>Signals-first feed.</strong> Cross-language patterns as hero content. Posts collapsed below as "raw reports."</td></tr>
+<tr><td><span class="inline-code">/</span></td><td>Homepage. Leaflet map + Craigslist-style neighborhood links with post/language counts. 1WTC logo + favicon.</td></tr>
+<tr><td><span class="inline-code">/[hood]</span></td><td><strong>Signals-first feed.</strong> Cross-language patterns as hero content. Top signal auto-expands on load. Posts collapsed below as "raw reports."</td></tr>
 <tr><td><span class="inline-code">/[hood]/directory</span></td><td>Business/org directory with language switching.</td></tr>
-<tr><td><span class="inline-code">/tower/[alias]</span></td><td>Personal bookmarks organized by topic floors. Persistent.</td></tr>
+<tr><td><span class="inline-code">/tower/[alias]</span></td><td>Personal bookmarks organized by topic floors. Tower of Babel pyramid shape. Persistent.</td></tr>
+<tr><td><span class="inline-code">/demo</span></td><td>Pitch route. Pre-built tower for demo user, curated walkthrough.</td></tr>
 </table>
 
 <h3>API Routes</h3>
@@ -152,8 +153,8 @@
 <tr><th>Route</th><th>Method</th><th>What it does</th></tr>
 <tr><td><span class="inline-code">/api/post</span></td><td>POST</td><td>Submit report. Full LLM pipeline. Returns processing receipt.</td></tr>
 <tr><td><span class="inline-code">/api/feed</span></td><td>GET</td><td>Posts for neighborhood(s) + bleed-in from adjacent.</td></tr>
-<tr><td><span class="inline-code">/api/translate</span></td><td>GET</td><td>On-demand translation. Cached.</td></tr>
-<tr><td><span class="inline-code">/api/signals</span></td><td>GET</td><td>Cross-language signal clusters + cross-neighborhood signals.</td></tr>
+<tr><td><span class="inline-code">/api/translate</span></td><td>GET</td><td>On-demand translation. Pre-cached for EN/ES/ZH.</td></tr>
+<tr><td><span class="inline-code">/api/signals</span></td><td>GET</td><td>Cross-language signal clusters + cross-neighborhood CITY-LEVEL signals.</td></tr>
 <tr><td><span class="inline-code">/api/enrich</span></td><td>GET</td><td>Tavily web search for signal context (news, complaints, records).</td></tr>
 <tr><td><span class="inline-code">/api/bookmarks</span></td><td>GET/POST</td><td>Tower bookmark management.</td></tr>
 <tr><td><span class="inline-code">/api/seed</span></td><td>POST</td><td>Seed DB with demo data.</td></tr>
@@ -167,15 +168,23 @@
 <ol>
 <li><strong>Signals-first layout</strong>: Neighborhood pages open to cross-language signal clusters, not a post feed. Posts are "raw reports" collapsed below. The product is the patterns, not the posts.</li>
 
-<li><strong>Signal strength indicator</strong>: 2 languages = yellow, 3-4 = orange, 5+ = red "NEIGHBORHOOD CONSENSUS." Visual gravity of cross-language agreement.</li>
+<li><strong>Signal strength indicator</strong>: 2 languages = yellow, 3-4 = orange, 5+ = red "STRONG CORROBORATION." Visual gravity of cross-language agreement.</li>
 
-<li><strong>Cross-neighborhood signals</strong>: Entities appearing in 2+ neighborhoods get a red "CITY-LEVEL SIGNAL" card. Serial predators can't hide behind geographic silos.</li>
+<li><strong>Cross-neighborhood CITY-LEVEL SIGNAL cards</strong>: Entities appearing in 2+ neighborhoods get a red "CITY-LEVEL SIGNAL" card. Serial predators can't hide behind geographic silos.</li>
 
 <li><strong>Privacy-safe language badges</strong>: Language badges on signals only show when 2+ posts exist in that language. Prevents "only Bengali speaker in the building" identification.</li>
 
-<li><strong>Tavily enrichment</strong>: Click "enrich" on a signal to pull real web context (news, complaints, public records) via Tavily API.</li>
+<li><strong>Full UI i18n (EN/ES/ZH)</strong>: Every label, button, header, and nav element translates. Not just post content -- the entire interface.</li>
+
+<li><strong>Pre-cached translations</strong>: EN/ES/ZH translations pre-computed at seed time. Language switching is instant, no LLM call needed.</li>
+
+<li><strong>One-click complaint links</strong>: Each signal card includes direct links to NYC 311, Department of Labor, and DCA for filing complaints.</li>
 
 <li><strong>Auto-detect viewer language</strong>: Browser locale auto-sets reading language. A Spanish speaker's phone shows everything in Spanish automatically.</li>
+
+<li><strong>Auto-expand top signal on page load</strong>: First signal card opens automatically so judges see content immediately.</li>
+
+<li><strong>Tavily enrichment</strong>: Click "enrich" on a signal to pull real web context (news, complaints, public records) via Tavily API.</li>
 
 <li><strong>Single-inference pipeline</strong>: One LLM call per post does 7 things: language detection, meaning-based translation, PII stripping, immigrant-aware moderation, topic tagging, entity extraction, cultural notes.</li>
 
@@ -183,13 +192,19 @@
 
 <li><strong>Processing receipt</strong>: Green card flashes after posting showing full pipeline output.</li>
 
-<li><strong>Tower</strong>: Bookmarked posts organized by topic floors. Posts in tower don't expire.</li>
+<li><strong>Tower of Babel</strong>: Bookmarked posts organized by topic floors. Pyramid shape. Demo-user pre-built tower for pitch. Posts in tower don't expire.</li>
+
+<li><strong>Leaflet map on homepage</strong>: Interactive map showing all 12 neighborhoods with post counts.</li>
+
+<li><strong>1WTC logo + favicon</strong>: Custom branding. Tower motif throughout.</li>
 
 <li><strong>Bleed-in</strong>: Posts from adjacent neighborhoods appear with purple border.</li>
 
-<li><strong>Anonymous identity</strong>: Phone hash -> deterministic alias. Never stored. Never reversible.</li>
+<li><strong>Anonymous identity</strong>: Phone hash -&gt; deterministic alias. Never stored. Never reversible.</li>
 
 <li><strong>Collective leverage copy</strong>: Each signal card shows "This pattern was invisible until N communities reported independently."</li>
+
+<li><strong>/demo pitch route</strong>: Curated walkthrough for judges with pre-seeded data and demo user tower.</li>
 </ol>
 
 <h3>Trust Model</h3>
@@ -241,6 +256,7 @@
       page.tsx                  # Signals-first feed + cross-hood signals
       directory/page.tsx        # Business directory with lang switching
     tower/[alias]/page.tsx      # Personal tower
+    demo/page.tsx               # Pitch route
     api/
       post/route.ts             # Post submission pipeline
       feed/route.ts             # Feed query
@@ -263,8 +279,8 @@
     db.ts                       # SQLite schema + all queries
     translate.ts                # Dual-backend LLM pipeline
     tavily.ts                   # Tavily search client
-    neighborhoods.ts            # 8 neighborhoods, adjacency graph, 13 languages
-    seed.ts                     # 54 demo posts + 23 directory entries + entities
+    neighborhoods.ts            # 12 neighborhoods, adjacency graph, 13 languages
+    seed.ts                     # 68 demo posts + 23 directory entries + entities
     identity.ts                 # Phone hash -&gt; anonymous alias
   types/
     speech.d.ts                 # WebSpeech API types</pre>

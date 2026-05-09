@@ -1,6 +1,6 @@
 # UnBabel -- Build for the Border Hackathon
 
-**Last updated: May 9 2026, 2:15 PM ET**
+**Last updated: May 9 2026, 3:45 PM ET**
 
 ## What Is This
 
@@ -46,7 +46,7 @@ You are co-presenting. You need to understand:
 
 ---
 
-## What's Built (as of 2:15 PM May 9)
+## What's Built (as of 3:45 PM May 9)
 
 ### Architecture
 
@@ -65,7 +65,7 @@ Next.js 16 + SQLite (better-sqlite3) + Tailwind CSS
 
 ### Current Stats
 
-- 8 neighborhoods, 54 seed posts, 23 directory entries
+- 12 neighborhoods, 68 seed posts, 23 directory entries
 - 13 languages: EN, ES, ZH, KO, RU, BN, HI, AR, TL, NE, EL, PT, FR
 - 10+ active signal clusters in Jackson Heights alone
 - "free esl" signal: 6 languages, 8 independent reports
@@ -74,10 +74,11 @@ Next.js 16 + SQLite (better-sqlite3) + Tailwind CSS
 
 | Route | What it does |
 |-------|-------------|
-| `/` | Homepage. Craigslist-style neighborhood links with post/language counts. |
-| `/[hood]` | **Signals-first feed.** Cross-language patterns as hero content. Posts collapsed below as "raw reports." |
+| `/` | Homepage. Leaflet map + Craigslist-style neighborhood links with post/language counts. 1WTC logo + favicon. |
+| `/[hood]` | **Signals-first feed.** Cross-language patterns as hero content. Top signal auto-expands on load. Posts collapsed below as "raw reports." |
 | `/[hood]/directory` | Business/org directory with language switching. |
-| `/tower/[alias]` | Personal bookmarks organized by topic floors. Persistent. |
+| `/tower/[alias]` | Personal bookmarks organized by topic floors. Tower of Babel pyramid shape. Persistent. |
+| `/demo` | Pitch route. Pre-built tower for demo user, curated walkthrough. |
 
 ### API Routes
 
@@ -85,8 +86,8 @@ Next.js 16 + SQLite (better-sqlite3) + Tailwind CSS
 |-------|--------|-------------|
 | `/api/post` | POST | Submit report. Full LLM pipeline. Returns processing receipt. |
 | `/api/feed` | GET | Posts for neighborhood(s) + bleed-in from adjacent. |
-| `/api/translate` | GET | On-demand translation. Cached. |
-| `/api/signals` | GET | Cross-language signal clusters + cross-neighborhood signals. |
+| `/api/translate` | GET | On-demand translation. Pre-cached for EN/ES/ZH. |
+| `/api/signals` | GET | Cross-language signal clusters + cross-neighborhood CITY-LEVEL signals. |
 | `/api/enrich` | GET | Tavily web search for signal context (news, complaints, records). |
 | `/api/bookmarks` | GET/POST | Tower bookmark management. |
 | `/api/seed` | POST | Seed DB with demo data. |
@@ -98,29 +99,43 @@ Next.js 16 + SQLite (better-sqlite3) + Tailwind CSS
 
 1. **Signals-first layout**: Neighborhood pages open to cross-language signal clusters, not a post feed. Posts are "raw reports" collapsed below. The product is the patterns, not the posts.
 
-2. **Signal strength indicator**: 2 languages = yellow, 3-4 = orange, 5+ = red "NEIGHBORHOOD CONSENSUS." Visual gravity of cross-language agreement.
+2. **Signal strength indicator**: 2 languages = yellow, 3-4 = orange, 5+ = red "STRONG CORROBORATION." Visual gravity of cross-language agreement.
 
-3. **Cross-neighborhood signals**: Entities appearing in 2+ neighborhoods get a red "CITY-LEVEL SIGNAL" card. Serial predators can't hide behind geographic silos.
+3. **Cross-neighborhood CITY-LEVEL SIGNAL cards**: Entities appearing in 2+ neighborhoods get a red "CITY-LEVEL SIGNAL" card. Serial predators can't hide behind geographic silos.
 
 4. **Privacy-safe language badges**: Language badges on signals only show when 2+ posts exist in that language. Prevents "only Bengali speaker in the building" identification.
 
-5. **Tavily enrichment**: Click "enrich" on a signal to pull real web context (news, complaints, public records) via Tavily API.
+5. **Full UI i18n (EN/ES/ZH)**: Every label, button, header, and nav element translates. Not just post content -- the entire interface.
 
-6. **Auto-detect viewer language**: Browser locale auto-sets reading language. A Spanish speaker's phone shows everything in Spanish automatically.
+6. **Pre-cached translations**: EN/ES/ZH translations pre-computed at seed time. Language switching is instant, no LLM call needed.
 
-7. **Single-inference pipeline**: One LLM call per post does 7 things: language detection, meaning-based translation, PII stripping, immigrant-aware moderation, topic tagging, entity extraction, cultural notes.
+7. **One-click complaint links**: Each signal card includes direct links to NYC 311, Department of Labor, and DCA for filing complaints.
 
-8. **Voice input**: WebSpeech API. Click "speak," select language, talk.
+8. **Auto-detect viewer language**: Browser locale auto-sets reading language. A Spanish speaker's phone shows everything in Spanish automatically.
 
-9. **Processing receipt**: Green card flashes after posting showing full pipeline output.
+9. **Auto-expand top signal on page load**: First signal card opens automatically so judges see content immediately.
 
-10. **Tower**: Bookmarked posts organized by topic floors. Posts in tower don't expire.
+10. **Tavily enrichment**: Click "enrich" on a signal to pull real web context (news, complaints, public records) via Tavily API.
 
-11. **Bleed-in**: Posts from adjacent neighborhoods appear with purple border.
+11. **Single-inference pipeline**: One LLM call per post does 7 things: language detection, meaning-based translation, PII stripping, immigrant-aware moderation, topic tagging, entity extraction, cultural notes.
 
-12. **Anonymous identity**: Phone hash -> deterministic alias. Never stored. Never reversible.
+12. **Voice input**: WebSpeech API. Click "speak," select language, talk.
 
-13. **Collective leverage copy**: Each signal card shows "This pattern was invisible until N communities reported independently."
+13. **Processing receipt**: Green card flashes after posting showing full pipeline output.
+
+14. **Tower of Babel**: Bookmarked posts organized by topic floors. Pyramid shape. Demo-user pre-built tower for pitch. Posts in tower don't expire.
+
+15. **Leaflet map on homepage**: Interactive map showing all 12 neighborhoods with post counts.
+
+16. **1WTC logo + favicon**: Custom branding. Tower motif throughout.
+
+17. **Bleed-in**: Posts from adjacent neighborhoods appear with purple border.
+
+18. **Anonymous identity**: Phone hash -> deterministic alias. Never stored. Never reversible.
+
+19. **Collective leverage copy**: Each signal card shows "This pattern was invisible until N communities reported independently."
+
+20. **/demo pitch route**: Curated walkthrough for judges with pre-seeded data and demo user tower.
 
 ### Trust Model
 
@@ -167,6 +182,7 @@ src/
       page.tsx                  # Signals-first feed + cross-hood signals
       directory/page.tsx        # Business directory with lang switching
     tower/[alias]/page.tsx      # Personal tower
+    demo/page.tsx               # Pitch route
     api/
       post/route.ts             # Post submission pipeline
       feed/route.ts             # Feed query
@@ -189,8 +205,8 @@ src/
     db.ts                       # SQLite schema + all queries
     translate.ts                # Dual-backend LLM pipeline
     tavily.ts                   # Tavily search client
-    neighborhoods.ts            # 8 neighborhoods, adjacency graph, 13 languages
-    seed.ts                     # 54 demo posts + 23 directory entries + entities
+    neighborhoods.ts            # 12 neighborhoods, adjacency graph, 13 languages
+    seed.ts                     # 68 demo posts + 23 directory entries + entities
     identity.ts                 # Phone hash -> anonymous alias
   types/
     speech.d.ts                 # WebSpeech API types
