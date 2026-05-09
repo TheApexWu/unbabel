@@ -40,6 +40,32 @@ interface EnrichResult {
   content: string;
 }
 
+function getComplaintUrl(entityType: string, entityValue: string): { url: string; label: string } {
+  const val = entityValue.toLowerCase();
+
+  if (entityType === "issue") {
+    if (/rent|landlord|no hot water|heat/.test(val)) {
+      return { url: "https://portal.311.nyc.gov/sr-step/?id=5887c3f4-df69-ee11-a204-0af34963091e", label: "file housing complaint with NYC 311" };
+    }
+    if (/overcharging|scam|hidden fees/.test(val)) {
+      return { url: "https://www.nyc.gov/site/dca/consumers/file-complaint.page", label: "file complaint with NYC consumer affairs" };
+    }
+    if (/wage|job/.test(val)) {
+      return { url: "https://dol.ny.gov/unpaidwithheld-wages-and-wage-supplements", label: "file wage theft complaint with NY DOL" };
+    }
+  }
+
+  if (entityType === "business") {
+    return { url: "https://portal.311.nyc.gov/", label: "file business complaint with NYC 311" };
+  }
+
+  if (entityType === "street" && /dangerous|intersection/.test(val)) {
+    return { url: "https://portal.311.nyc.gov/", label: "report street condition to NYC 311" };
+  }
+
+  return { url: "https://portal.311.nyc.gov/", label: "file complaint with NYC 311" };
+}
+
 function SignalStrength({ langCount }: { langCount: number }) {
   const barClass = "inline-block w-1.5 h-4 rounded-sm mr-0.5";
   if (langCount >= 5) {
@@ -250,6 +276,26 @@ export function SignalCard({ signal, hood, viewerLang }: { signal: Signal; hood?
               </p>
             )}
           </div>
+
+          {/* Take action -- only for 3+ languages */}
+          {signal.lang_count >= 3 && (() => {
+            const complaint = getComplaintUrl(signal.entity_type, signal.entity_value);
+            return (
+              <div className="border-t border-amber-300 bg-amber-100/30 p-3 mt-2" onClick={(e) => e.stopPropagation()}>
+                <p className="text-xs text-amber-800 font-bold uppercase tracking-wide mb-2">
+                  take action
+                </p>
+                <p className="text-xs text-amber-700 mb-2">
+                  {signal.lang_count} independent communities flagged this. File a formal complaint:
+                </p>
+                <a href={complaint.url} target="_blank" rel="noopener noreferrer"
+                   className="inline-block bg-purple-800 text-white text-xs font-mono px-4 py-2 hover:bg-purple-900"
+                   onClick={(e) => e.stopPropagation()}>
+                  {complaint.label}
+                </a>
+              </div>
+            );
+          })()}
         </div>
       )}
     </div>
