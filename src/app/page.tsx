@@ -57,12 +57,19 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-8 text-xs text-gray-400 space-y-2">
-        <p>
-          nyc has 800 languages. we built enclaves, not bridges. unbabel lets
-          you overhear your neighborhood in every language without knowing
-          who&apos;s talking.
-        </p>
+      <div className="mt-8 border border-gray-200 bg-gray-50 p-4">
+        <h3 className="text-xs text-gray-500 uppercase tracking-widest mb-3">
+          how it works
+        </h3>
+        <div className="space-y-2 text-xs text-gray-500">
+          <p><strong className="text-gray-700">1. post in any language.</strong> write or speak. we detect, translate, and strip personal info in one pass.</p>
+          <p><strong className="text-gray-700">2. read in yours.</strong> every post appears in the language you choose. the source language is invisible.</p>
+          <p><strong className="text-gray-700">3. patterns emerge.</strong> when multiple languages mention the same landlord, clinic, or warning, a signal card surfaces it.</p>
+          <p><strong className="text-gray-700">4. save what matters.</strong> bookmark posts to your tower. they stay even after the feed expires.</p>
+        </div>
+      </div>
+
+      <div className="mt-4 text-xs text-gray-400 space-y-2">
         <p>
           no profiles. no DMs. no followers. no algorithm. posts expire in 7
           days. you don&apos;t need to meet anyone. you just need to hear them.
