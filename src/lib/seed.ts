@@ -1,4 +1,4 @@
-import { createPost, createDirectoryEntry, insertEntities, db } from "./db";
+import { createPost, createDirectoryEntry, insertEntities, addBookmark, db } from "./db";
 
 /**
  * Seed the database with realistic posts carrying real neighborhood signal.
@@ -753,6 +753,19 @@ export function seedDatabase() {
 
   for (const d of directory) {
     createDirectoryEntry(d);
+  }
+
+  // --- Demo bookmarks for /tower/demo-user ---
+  const demoBookmarks = [
+    { postId: 1, topic: "health" },      // ES, dentist, jackson-heights
+    { postId: 6, topic: "food" },         // ZH, dumpling restaurant, flushing
+    { postId: 13, topic: "legal" },       // EN, free legal clinic, washington-heights
+    { postId: 18, topic: "housing" },     // EN, rent increase, bushwick (actually post 19 is 1-indexed)
+    { postId: 5, topic: "education" },    // ES, free ESL, jackson-heights
+    { postId: 17, topic: "services" },    // EN, surplus store, sunset-park (actually post 18 is 1-indexed)
+  ];
+  for (const bm of demoBookmarks) {
+    addBookmark("demo-user", bm.postId, bm.topic);
   }
 
   return { status: "seeded", posts: posts.length, directory: directory.length };

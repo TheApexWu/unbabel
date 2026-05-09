@@ -14,13 +14,6 @@ function getDatabase(): Database.Database {
     globalForDb._db.pragma("journal_mode = WAL");
     globalForDb._db.pragma("busy_timeout = 5000");
     globalForDb._db.exec(SCHEMA);
-
-    // Auto-seed if DB is empty
-    const count = globalForDb._db.prepare("SELECT COUNT(*) as c FROM posts").get() as { c: number };
-    if (count.c === 0) {
-      const { seedDatabase } = require("./seed");
-      seedDatabase();
-    }
   }
   return globalForDb._db;
 }
@@ -93,6 +86,15 @@ CREATE INDEX IF NOT EXISTS idx_bookmarks_alias ON bookmarks(alias);
 `;
 
 export const db = getDatabase();
+
+// Auto-seed if DB is empty (after db export to avoid circular dep with seed.ts)
+{
+  const count = db.prepare("SELECT COUNT(*) as c FROM posts").get() as { c: number };
+  if (count.c === 0) {
+    const { seedDatabase } = require("./seed");
+    seedDatabase();
+  }
+}
 
 // --- Post queries ---
 

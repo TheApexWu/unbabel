@@ -67,7 +67,12 @@ export default function HoodFeed() {
   useEffect(() => {
     setViewerLang(detectLang());
     const saved = localStorage.getItem("unbabel_alias");
-    if (saved) setViewerAlias(saved);
+    if (saved) {
+      setViewerAlias(saved);
+    } else {
+      setViewerAlias("demo-user");
+      localStorage.setItem("unbabel_alias", "demo-user");
+    }
   }, []);
   const [viewerAlias, setViewerAlias] = useState<string | undefined>();
   const [loading, setLoading] = useState(true);
