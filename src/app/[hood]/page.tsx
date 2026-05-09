@@ -19,6 +19,15 @@ interface Post {
   created_at: string;
 }
 
+interface SignalPost {
+  id: number;
+  alias: string;
+  body_original: string;
+  source_lang: string;
+  hood: string;
+  created_at: string;
+}
+
 interface Signal {
   entity_value: string;
   entity_type: string;
@@ -26,6 +35,7 @@ interface Signal {
   post_count: number;
   languages: string;
   post_ids: string;
+  posts?: SignalPost[];
 }
 
 export default function HoodFeed() {
@@ -36,6 +46,7 @@ export default function HoodFeed() {
   const [viewerLang, setViewerLang] = useState("en");
   const [viewerAlias, setViewerAlias] = useState<string | undefined>();
   const [loading, setLoading] = useState(true);
+  const [showRawReports, setShowRawReports] = useState(false);
 
   const neighborhood = NEIGHBORHOODS.find((n) => n.slug === hood);
 
@@ -65,7 +76,6 @@ export default function HoodFeed() {
     loadPosts();
   }, [loadPosts]);
 
-  // When user posts, we get their alias back
   const handlePosted = useCallback((alias?: string) => {
     if (alias) setViewerAlias(alias);
     loadPosts();
@@ -81,6 +91,9 @@ export default function HoodFeed() {
       </main>
     );
   }
+
+  const postCount = posts.length;
+  const langSet = new Set(posts.map((p) => p.source_lang));
 
   return (
     <main className="max-w-2xl mx-auto px-4 py-6">
@@ -114,7 +127,7 @@ export default function HoodFeed() {
       {/* Nav */}
       <div className="flex gap-4 mb-4 text-sm border-b border-gray-200 pb-2">
         <span className="text-purple-800 font-bold border-b-2 border-purple-800 pb-1">
-          the feed
+          signals
         </span>
         <Link
           href={`/${hood}/directory`}
@@ -124,38 +137,72 @@ export default function HoodFeed() {
         </Link>
       </div>
 
-      {/* Post form */}
-      <div className="mb-6">
-        <PostForm hood={hood} onPosted={handlePosted} />
-      </div>
-
-      {/* Signal Cards */}
-      {signals.length > 0 && (
-        <div className="space-y-3 mb-6">
+      {/* Signals -- HERO SECTION */}
+      {loading ? (
+        <p className="text-gray-400 text-sm animate-pulse font-mono">listening across languages...</p>
+      ) : signals.length > 0 ? (
+        <div className="space-y-4 mb-8">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-xs text-gray-500 font-mono uppercase tracking-wide">
+              cross-language patterns detected
+            </span>
+            <span className="text-xs text-gray-400 font-mono">
+              {signals.length} active
+            </span>
+          </div>
           {signals.map((signal) => (
             <SignalCard key={signal.entity_value} signal={signal} />
           ))}
         </div>
+      ) : (
+        <div className="border-2 border-dashed border-gray-300 p-6 mb-8 text-center font-mono">
+          <p className="text-gray-500 text-sm mb-1">no cross-language patterns yet</p>
+          <p className="text-gray-400 text-xs">
+            when multiple languages mention the same person, place, or issue, it surfaces here.
+          </p>
+        </div>
       )}
 
-      {/* Posts */}
-      <div className="space-y-3 pb-8">
-        {loading ? (
-          <p className="text-gray-400 text-sm animate-pulse">loading...</p>
-        ) : posts.length === 0 ? (
-          <p className="text-gray-400 text-sm">
-            no posts yet. be the first to talk.
-          </p>
-        ) : (
-          posts.map((post) => (
-            <PostCard
-              key={post.id}
-              post={post}
-              viewerLang={viewerLang}
-              currentHood={hood}
-              viewerAlias={viewerAlias}
-            />
-          ))
+      {/* Report form */}
+      <div className="mb-6">
+        <p className="text-xs text-gray-500 font-mono mb-2 uppercase tracking-wide">
+          report something
+        </p>
+        <PostForm hood={hood} onPosted={handlePosted} />
+      </div>
+
+      {/* Raw reports -- collapsed by default */}
+      <div className="border-t border-gray-200 pt-4 pb-8">
+        <button
+          onClick={() => setShowRawReports(!showRawReports)}
+          className="flex items-center gap-2 text-xs text-gray-500 font-mono hover:text-purple-800 mb-3"
+        >
+          <span className={`transition-transform ${showRawReports ? "rotate-90" : ""}`}>
+            &#9654;
+          </span>
+          <span className="uppercase tracking-wide">
+            raw reports ({postCount} posts, {langSet.size} languages)
+          </span>
+        </button>
+
+        {showRawReports && (
+          <div className="space-y-3">
+            {posts.length === 0 ? (
+              <p className="text-gray-400 text-sm font-mono">
+                no reports yet. be the first.
+              </p>
+            ) : (
+              posts.map((post) => (
+                <PostCard
+                  key={post.id}
+                  post={post}
+                  viewerLang={viewerLang}
+                  currentHood={hood}
+                  viewerAlias={viewerAlias}
+                />
+              ))
+            )}
+          </div>
         )}
       </div>
     </main>

@@ -265,6 +265,162 @@ export function seedDatabase() {
       hood: "east-harlem",
       tenure: "new",
     },
+
+    // === NEW: Bengali posts (Jackson Heights / Astoria) ===
+    {
+      alias: "still-river",
+      body: "74th Street এ নতুন একটা গ্রোসারি খুলেছে, দাম অনেক কম। SSN ছাড়াই ফোন প্ল্যান পাওয়া যায়।",
+      lang: "bn",
+      hood: "jackson-heights",
+      tenure: "new",
+    },
+    {
+      alias: "soft-wind",
+      body: "37th Ave এর রিয়েলটি অফিসে সাইন করবেন না। সাইন করার পরে অতিরিক্ত ফি যোগ করে।",
+      lang: "bn",
+      hood: "jackson-heights",
+      tenure: "settled",
+    },
+    {
+      alias: "warm-rain",
+      body: "কেউ কি জানেন কোথায় ফ্রি ইংরেজি ক্লাস পাওয়া যায়? আমি সবে এসেছি, কিছুই বুঝি না।",
+      lang: "bn",
+      hood: "jackson-heights",
+      tenure: "new",
+    },
+    {
+      alias: "clear-moon",
+      body: "Astoria তে ভালো ইমিগ্রেশন উকিল কে চেনেন? ওয়ার্ক পার্মিট রিনিউ করতে হবে।",
+      lang: "bn",
+      hood: "astoria",
+      tenure: "settled",
+    },
+
+    // === NEW: Tagalog posts (Jackson Heights / Bushwick) ===
+    {
+      alias: "bright-shore",
+      body: "Yung dentista sa Roosevelt Ave mura lang, $80 cleaning. Magaling siya at matiyaga kahit di ka marunong mag-English.",
+      lang: "tl",
+      hood: "jackson-heights",
+      tenure: "settled",
+    },
+    {
+      alias: "kind-wave",
+      body: "Mag-ingat sa realty office sa 37th Ave. May mga hidden fees pagkatapos pumirma. Nangyari sa kapitbahay ko.",
+      lang: "tl",
+      hood: "jackson-heights",
+      tenure: "rooted",
+    },
+    {
+      alias: "free-sail",
+      body: "May libreng ESL class sa simbahan tuwing Sabado. Tumatanggap din sila ng kahit anong wika. Maganda ang turo.",
+      lang: "tl",
+      hood: "bushwick",
+      tenure: "new",
+    },
+    {
+      alias: "swift-palm",
+      body: "Ang community fridge sa Willoughby lagi namang puno. Nagdadala ako ng gulay tuwing Sabado. Kung gusto nyo tumulong, punta lang.",
+      lang: "tl",
+      hood: "bushwick",
+      tenure: "settled",
+    },
+
+    // === NEW: Russian posts (Flushing / Sunset Park) ===
+    {
+      alias: "cold-star",
+      body: "В библиотеке Флашинга бесплатные курсы английского и помощь с документами на гражданство. Персонал говорит по-русски.",
+      lang: "ru",
+      hood: "flushing",
+      tenure: "settled",
+    },
+    {
+      alias: "deep-frost",
+      body: "Механик на Bowne St честный. Взял $300 за тормоза, другие просили $800. Спросите Майка.",
+      lang: "ru",
+      hood: "flushing",
+      tenure: "rooted",
+    },
+    {
+      alias: "north-light",
+      body: "Аренда выросла на $400, а хозяин ничего не чинит. Кто знает куда жаловаться чтобы не было проблем?",
+      lang: "ru",
+      hood: "sunset-park",
+      tenure: "new",
+    },
+    {
+      alias: "pale-bridge",
+      body: "На 8th Avenue есть китайская ассоциация, они помогают с работой и переводом документов бесплатно. Не только для китайцев.",
+      lang: "ru",
+      hood: "sunset-park",
+      tenure: "settled",
+    },
+
+    // === NEW: More Hindi (Jackson Heights) ===
+    {
+      alias: "warm-gate",
+      body: "Roosevelt Ave pe dentist bahut sasta hai, $80 mein cleaning. Bahut achha hai, English nahi aati toh bhi koi problem nahi.",
+      lang: "hi",
+      hood: "jackson-heights",
+      tenure: "rooted",
+    },
+
+    // === NEW: More Arabic (Astoria / Sunset Park) ===
+    {
+      alias: "gold-arch",
+      body: "محامي الهجرة على Broadway بيطلب ٣٠٠٠ دولار لتجديد تصريح العمل. ده كتير اوي. حد يعرف حد ارخص؟",
+      lang: "ar",
+      hood: "astoria",
+      tenure: "new",
+    },
+    {
+      alias: "red-sand",
+      body: "الإيجار زاد ٤٠٠ دولار والمالك مش بيصلح حاجة. مفيش مية سخنة من اسبوعين. حد يعرف نشتكي فين؟",
+      lang: "ar",
+      hood: "sunset-park",
+      tenure: "settled",
+    },
+
+    // === NEW: More French (East Harlem / Washington Heights) ===
+    {
+      alias: "blue-wing",
+      body: "La clinique sur la 117e rue accepte les patients sans assurance. Ils parlent espagnol et un peu francais. Pas besoin de papiers.",
+      lang: "fr",
+      hood: "east-harlem",
+      tenure: "settled",
+    },
+    {
+      alias: "dark-root",
+      body: "Le loyer a augmente de 200 dollars et ils disent que c'est legal. Quelqu'un connait un avocat gratuit pour les locataires?",
+      lang: "fr",
+      hood: "east-harlem",
+      tenure: "new",
+    },
+    {
+      alias: "green-leaf",
+      body: "Il y a des cours d'anglais gratuits a l'eglise sur la 181e rue. Ma femme y va et c'est tres bien. Ils aident aussi avec les formulaires.",
+      lang: "fr",
+      hood: "washington-heights",
+      tenure: "new",
+    },
+
+    // === NEW: More Korean (Flushing) ===
+    {
+      alias: "calm-peak",
+      body: "플러싱 도서관에서 무료 시민권 시험 준비반 있어요. 러시아어, 중국어, 한국어 다 돼요. 토요일 오전에 가세요.",
+      lang: "ko",
+      hood: "flushing",
+      tenure: "settled",
+    },
+
+    // === NEW: More Nepali (Jackson Heights) ===
+    {
+      alias: "high-trail",
+      body: "37th Ave मा भएको रियल्टी अफिसमा साइन नगर्नुहोस्। साइन गरेपछि थप शुल्क थप्छन्।",
+      lang: "ne",
+      hood: "jackson-heights",
+      tenure: "settled",
+    },
   ];
 
   // Entity map keyed by post index (0-based), pre-computed for demo
@@ -306,6 +462,34 @@ export function seedDatabase() {
     31: [{ type: "issue", value: "rent increase" }, { type: "issue", value: "rent stabilized" }],
     32: [{ type: "street", value: "117th and 3rd" }, { type: "org", value: "clinic" }, { type: "issue", value: "healthcare no insurance" }],
     33: [{ type: "issue", value: "new arrival" }, { type: "issue", value: "french speakers" }],
+    // Bengali
+    34: [{ type: "street", value: "74th street" }, { type: "issue", value: "phone plan no ssn" }],
+    35: [{ type: "street", value: "37th ave" }, { type: "issue", value: "hidden fees" }, { type: "issue", value: "rental scam" }],
+    36: [{ type: "issue", value: "free esl" }, { type: "issue", value: "new arrival" }],
+    37: [{ type: "issue", value: "immigration lawyer" }, { type: "issue", value: "work permit" }],
+    // Tagalog
+    38: [{ type: "street", value: "roosevelt ave" }, { type: "issue", value: "dentist" }],
+    39: [{ type: "street", value: "37th ave" }, { type: "issue", value: "hidden fees" }, { type: "issue", value: "rental scam" }],
+    40: [{ type: "issue", value: "free esl" }],
+    41: [{ type: "street", value: "willoughby ave" }, { type: "org", value: "community fridge" }],
+    // Russian
+    42: [{ type: "org", value: "flushing library" }, { type: "issue", value: "free esl" }, { type: "issue", value: "citizenship prep" }],
+    43: [{ type: "street", value: "bowne st" }, { type: "business", value: "mechanic" }],
+    44: [{ type: "issue", value: "rent increase" }, { type: "issue", value: "landlord neglect" }],
+    45: [{ type: "street", value: "8th avenue" }, { type: "issue", value: "job help" }, { type: "issue", value: "document help" }],
+    // Hindi
+    46: [{ type: "street", value: "roosevelt ave" }, { type: "issue", value: "dentist" }],
+    // Arabic
+    47: [{ type: "issue", value: "immigration lawyer" }, { type: "issue", value: "work permit" }, { type: "issue", value: "overcharging" }],
+    48: [{ type: "issue", value: "rent increase" }, { type: "issue", value: "landlord neglect" }, { type: "issue", value: "no hot water" }],
+    // French
+    49: [{ type: "street", value: "117th and 3rd" }, { type: "org", value: "clinic" }, { type: "issue", value: "healthcare no insurance" }],
+    50: [{ type: "issue", value: "rent increase" }, { type: "issue", value: "rent stabilized" }],
+    51: [{ type: "street", value: "181st street" }, { type: "issue", value: "free esl" }],
+    // Korean
+    52: [{ type: "org", value: "flushing library" }, { type: "issue", value: "citizenship prep" }, { type: "issue", value: "free esl" }],
+    // Nepali
+    53: [{ type: "street", value: "37th ave" }, { type: "issue", value: "hidden fees" }, { type: "issue", value: "rental scam" }],
   };
 
   for (let i = 0; i < posts.length; i++) {

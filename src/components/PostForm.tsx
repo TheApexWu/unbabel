@@ -155,7 +155,7 @@ export function PostForm({
           </p>
         </div>
         <textarea
-          placeholder="write or speak in any language..."
+          placeholder="report in any language -- a tip, a warning, a question..."
           value={text}
           onChange={(e) => setText(e.target.value)}
           rows={3}
@@ -197,7 +197,7 @@ export function PostForm({
           disabled={submitting || !text.trim() || !phone.trim()}
           className="bg-purple-800 text-white px-4 py-1 text-sm font-mono hover:bg-purple-900 disabled:opacity-50"
         >
-          {submitting ? "processing..." : "post to the block"}
+          {submitting ? "processing..." : "submit report"}
         </button>
       </form>
 
