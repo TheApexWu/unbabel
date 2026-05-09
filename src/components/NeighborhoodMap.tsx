@@ -13,6 +13,10 @@ const COORDS: Record<string, [number, number]> = {
   astoria: [40.7723, -73.9301],
   corona: [40.745, -73.8624],
   "east-harlem": [40.7957, -73.9389],
+  elmhurst: [40.736, -73.878],
+  chinatown: [40.7158, -73.997],
+  "brighton-beach": [40.5776, -73.9599],
+  fordham: [40.8614, -73.8977],
 };
 
 interface Stats {

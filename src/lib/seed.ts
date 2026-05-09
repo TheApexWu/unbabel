@@ -421,6 +421,112 @@ export function seedDatabase() {
       hood: "jackson-heights",
       tenure: "settled",
     },
+
+    // === Elmhurst === (indices 54-57)
+    {
+      alias: "fast-drum",
+      body: "El landlord subio la renta $350 sin aviso. Alguien sabe si eso es legal? Llevo 4 anos en el mismo apartamento.",
+      lang: "es",
+      hood: "elmhurst",
+      tenure: "settled",
+    },
+    {
+      alias: "still-lotus",
+      body: "Broadway上面新开了一家免费ESL班，周三和周五晚上。老师很有耐心，推荐给刚来的朋友。",
+      lang: "zh",
+      hood: "elmhurst",
+      tenure: "rooted",
+    },
+    {
+      alias: "kind-leaf",
+      body: "আমার বিল্ডিংয়ে ইঁদুরের সমস্যা খুব খারাপ। ল্যান্ডলর্ড কিছু করছে না। কোথায় অভিযোগ করতে পারি?",
+      lang: "bn",
+      hood: "elmhurst",
+      tenure: "new",
+    },
+    {
+      alias: "bold-reef",
+      body: "May free ESL class sa simbahan malapit sa Queens Center Mall. Monday at Wednesday 6pm. Maganda para sa mga bagong dating.",
+      lang: "tl",
+      hood: "elmhurst",
+      tenure: "settled",
+    },
+
+    // === Chinatown === (indices 58-60)
+    {
+      alias: "old-lantern",
+      body: "东百老汇那边有个办公室帮忙填表格，报税和申请福利都行。不收钱，说中文就行。",
+      lang: "zh",
+      hood: "chinatown",
+      tenure: "rooted",
+    },
+    {
+      alias: "jade-bridge",
+      body: "有人知道哪里可以找到餐馆的工作吗？刚来纽约，什么都不熟悉。会做粤菜。",
+      lang: "zh",
+      hood: "chinatown",
+      tenure: "new",
+    },
+    {
+      alias: "red-gate",
+      body: "The tenant association on Mott St helped me fight an illegal rent increase. Free, walk-in, they speak Cantonese and Mandarin.",
+      lang: "en",
+      hood: "chinatown",
+      tenure: "settled",
+    },
+
+    // === Brighton Beach === (indices 61-63)
+    {
+      alias: "cold-tide",
+      body: "Хозяин квартиры поднял аренду на $500 и ничего не чинит. Крыша течет уже месяц. Куда жаловаться?",
+      lang: "ru",
+      hood: "brighton-beach",
+      tenure: "settled",
+    },
+    {
+      alias: "grey-shore",
+      body: "На Brighton Beach Ave есть юрист который помогает с документами бесплатно. По четвергам с 3 до 6. Говорит по-русски и по-английски.",
+      lang: "ru",
+      hood: "brighton-beach",
+      tenure: "rooted",
+    },
+    {
+      alias: "white-sail",
+      body: "The pharmacy on Brighton 6th overcharged my grandmother for medication. Be careful and compare prices before buying there.",
+      lang: "en",
+      hood: "brighton-beach",
+      tenure: "settled",
+    },
+
+    // === Fordham === (indices 64-67)
+    {
+      alias: "strong-arch",
+      body: "Hay una clinica gratis en la Grand Concourse que atiende sin seguro medico. No piden papeles. Hablan espanol.",
+      lang: "es",
+      hood: "fordham",
+      tenure: "rooted",
+    },
+    {
+      alias: "iron-bell",
+      body: "Free legal clinic on Fordham Road every Tuesday. Immigration, housing, labor rights. No appointment, no ID. Ask for the Bronx Legal Services table.",
+      lang: "en",
+      hood: "fordham",
+      tenure: "settled",
+    },
+    {
+      alias: "amber-hill",
+      body: "الإيجار زاد ٣٠٠ دولار والبيت محتاج صيانة. المحكمة على Fordham Road فيها مساعدة مجانية للمستأجرين.",
+      lang: "ar",
+      hood: "fordham",
+      tenure: "new",
+    },
+    {
+      alias: "dark-flame",
+      body: "Cuidado con la farmacia nueva en la Grand Concourse, cobran de mas por las medicinas. Mejor ir a la de Kingsbridge.",
+      lang: "es",
+      hood: "fordham",
+      tenure: "settled",
+    },
   ];
 
   // Entity map keyed by post index (0-based), pre-computed for demo
@@ -490,6 +596,24 @@ export function seedDatabase() {
     52: [{ type: "org", value: "flushing library" }, { type: "issue", value: "citizenship prep" }, { type: "issue", value: "free esl" }],
     // Nepali
     53: [{ type: "street", value: "37th ave" }, { type: "issue", value: "hidden fees" }, { type: "issue", value: "rental scam" }],
+    // Elmhurst
+    54: [{ type: "issue", value: "rent increase" }, { type: "issue", value: "landlord neglect" }],
+    55: [{ type: "issue", value: "free esl" }, { type: "issue", value: "new arrival" }],
+    56: [{ type: "issue", value: "landlord neglect" }, { type: "issue", value: "pest infestation" }],
+    57: [{ type: "issue", value: "free esl" }, { type: "issue", value: "new arrival" }],
+    // Chinatown
+    58: [{ type: "street", value: "east broadway" }, { type: "issue", value: "document help" }, { type: "issue", value: "free tax prep" }],
+    59: [{ type: "issue", value: "job help" }, { type: "issue", value: "new arrival" }],
+    60: [{ type: "street", value: "mott st" }, { type: "issue", value: "rent increase" }, { type: "issue", value: "document help" }],
+    // Brighton Beach
+    61: [{ type: "issue", value: "rent increase" }, { type: "issue", value: "landlord neglect" }],
+    62: [{ type: "street", value: "brighton beach ave" }, { type: "issue", value: "document help" }, { type: "issue", value: "free legal clinic" }],
+    63: [{ type: "street", value: "brighton 6th" }, { type: "issue", value: "overcharging" }],
+    // Fordham
+    64: [{ type: "street", value: "grand concourse" }, { type: "org", value: "clinic" }, { type: "issue", value: "healthcare no insurance" }],
+    65: [{ type: "street", value: "fordham road" }, { type: "issue", value: "free legal clinic" }],
+    66: [{ type: "issue", value: "rent increase" }, { type: "issue", value: "landlord neglect" }, { type: "street", value: "fordham road" }],
+    67: [{ type: "street", value: "grand concourse" }, { type: "issue", value: "overcharging" }],
   };
 
   for (let i = 0; i < posts.length; i++) {
@@ -501,6 +625,82 @@ export function seedDatabase() {
     if (entities && entities.length > 0) {
       insertEntities(postId, entities, p.hood, p.lang);
     }
+  }
+
+  // --- Pre-baked translations for instant language switching ---
+  // English translations for all non-English seed posts (keyed by post index)
+  const SEED_TRANSLATIONS_EN: Record<number, string> = {
+    0: "Anyone know a cheap dentist? My son has a toothache and the hospital said 3 weeks wait.",
+    1: "New momo shop opened on Roosevelt, really good, you should check it out",
+    3: "The new grocery store on 74th street has really cheap desi stuff. You can get a phone plan without SSN too.",
+    4: "The church on 82nd has free English classes Saturdays at 10am. My wife went and says they're really good. They help with forms too.",
+    5: "The new dumpling place is better than Old Sichuan. The owner is from Fujian and helps translate documents for free.",
+    6: "The guy at the Main Street laundromat proofreads resumes in English. Just ask when you drop off laundry. Really nice guy.",
+    7: "The library has free citizenship test prep on Saturdays, and someone helps you practice interview English. Get there early, not many seats.",
+    9: "Looking for someone to watch my kid in the neighborhood. Doesn't have to be a licensed daycare. Just someone trustworthy.",
+    10: "The super in the building on 175th won't fix anything. We've had no hot water for 2 weeks. Anyone know how to report this without getting in trouble?",
+    11: "Any moms in the neighborhood want to practice English together? I just got here from Santo Domingo and don't know anyone. I have a 4 year old.",
+    13: "Watch out for the new laundromat on Broadway. They charge by weight but the scale is off. I went twice and it always weighs more than it should.",
+    14: "New Fujianese restaurant opened on 8th Ave, the oyster cakes taste just like back home. Owner says he can help newcomers find jobs, kitchen or construction.",
+    15: "Be careful at the intersection of 5th and 45th. Almost got hit twice this week. There's no stop sign and cars go fast.",
+    16: "Anyone know a good Chinese medicine doctor nearby? My back has been hurting for days. Preferably someone who speaks Fujianese.",
+    19: "The bodega on Myrtle has the best tamales on Sunday mornings. Get there before 9 because they sell out fast. The lady also sells atole.",
+    21: "Looking for someone to practice English with. I can help with Spanish. Can't afford classes but I learn fast.",
+    22: "The souvlaki on Ditmars is the best. The guy who makes it is from Thessaloniki. We go every Saturday.",
+    23: "The new Egyptian cafe on Steinway has hookah and homemade food. Prices are reasonable and the vibe is great.",
+    24: "The Brazilian salon on 30th Ave does eyebrows for $10 and the owner helps translate documents if you ask.",
+    26: "The lady who sells tamales at Roosevelt and 104th is there every Sunday morning. The rajas ones are the best.",
+    27: "Does anyone know where to learn English near Corona? Free would be best. I just got here two months ago and don't understand anything.",
+    28: "Watch out for the mechanic shop at the Junction. They charged me $500 for something another place did for $150. Don't go there.",
+    30: "The alcapurria from the lady on 116th and Lexington is the best in the neighborhood. Get there before noon because they sell out.",
+    32: "The clinic on 117th and 3rd sees patients without insurance. They speak Spanish and don't ask for papers. My family has been going there for years.",
+    33: "Looking for someone who speaks French in the neighborhood. I just arrived from Senegal and don't know anyone here.",
+    34: "A new grocery store opened on 74th Street, prices are really low. You can get a phone plan without SSN too.",
+    35: "Don't sign anything at the realty office on 37th Ave. They add extra fees after you sign.",
+    36: "Does anyone know where to get free English classes? I just arrived and don't understand anything.",
+    37: "Anyone know a good immigration lawyer in Astoria? I need to renew my work permit.",
+    38: "The dentist on Roosevelt Ave is cheap, $80 for cleaning. She's good and patient even if you don't speak English.",
+    39: "Be careful at the realty office on 37th Ave. There are hidden fees after you sign. Happened to my neighbor.",
+    40: "There's a free ESL class at the church every Saturday. They accept any language. The teaching is good.",
+    41: "The community fridge on Willoughby is always stocked. I bring vegetables every Saturday. If you want to help, just show up.",
+    42: "The Flushing library has free English courses and help with citizenship documents. Staff speaks Russian.",
+    43: "The mechanic on Bowne St is honest. Charged $300 for brakes, others wanted $800. Ask for Mike.",
+    44: "Rent went up $400 and the landlord doesn't fix anything. Anyone know where to complain without getting in trouble?",
+    45: "There's a Chinese association on 8th Avenue that helps with jobs and translating documents for free. Not just for Chinese people.",
+    46: "The dentist on Roosevelt Ave is really cheap, $80 for cleaning. Really good, no problem even if you don't speak English.",
+    47: "The immigration lawyer on Broadway wants $3000 to renew a work permit. That's way too much. Anyone know someone cheaper?",
+    48: "Rent went up $400 and the landlord won't fix anything. No hot water for two weeks. Anyone know where to complain?",
+    49: "The clinic on 117th street accepts patients without insurance. They speak Spanish and a little French. No papers needed.",
+    50: "Rent went up $200 and they say it's legal. Anyone know a free lawyer for tenants?",
+    51: "There are free English classes at the church on 181st street. My wife goes and it's really good. They help with forms too.",
+    52: "The Flushing library has a free citizenship test prep class. Russian, Chinese, Korean all available. Go Saturday morning.",
+    53: "Don't sign anything at the realty office on 37th Ave. They add extra fees after you sign.",
+  };
+
+  // Spanish translations for English seed posts
+  const SEED_TRANSLATIONS_ES: Record<number, string> = {
+    2: "NO firmen nada en la oficina de bienes raices en la 37th Ave. Agregan cargos despues de firmar y dicen que estaba en el contrato. Le paso a dos personas de mi edificio.",
+    8: "El mecanico en Bowne St es honesto. Me cobro $300 por los frenos, otro lugar queria $800. Pregunten por Mike, el te explica lo que esta haciendo.",
+    12: "Clinica legal de inmigracion gratis todos los jueves en el sotano de St. Joan of Arc en la 181. Sin cita, sin identificacion. Hablan espanol, hindi, urdu.",
+    17: "Si alguien necesita botas de trabajo o equipo de seguridad barato, la tienda de excedentes en la 4th Ave tiene buenas cosas. No hacen preguntas y aceptan efectivo.",
+    18: "El alquiler subio $400 y mi casero no arregla la calefaccion. La organizacion de derechos de inquilinos en Myrtle me ayudo a presentar una queja gratis. Pregunten por Maria.",
+    20: "La nevera comunitaria en Willoughby todavia se esta llenando? Puedo traer verduras extra los sabados si alguien coordina.",
+    25: "Alguien conoce un buen abogado de inmigracion por aqui? Necesito renovar mi permiso de trabajo y el de Broadway me cobro $3000, me parece una locura.",
+    29: "La biblioteca en la 104 tiene preparacion de impuestos gratis todos los sabados hasta abril. Hablan espanol y mandarin. No necesitas cita.",
+    31: "El apartamento de renta estabilizada en la 118 subio $200 y dicen que es legal. Es verdad? A quien llamo?",
+  };
+
+  // Insert pre-baked translations
+  const insertTrans = db.prepare(
+    "INSERT OR IGNORE INTO translations (post_id, target_lang, translated_text) VALUES (?, ?, ?)"
+  );
+  for (const [indexStr, text] of Object.entries(SEED_TRANSLATIONS_EN)) {
+    const postId = Number(indexStr) + 1; // posts are 1-indexed in DB
+    insertTrans.run(postId, "en", text);
+  }
+  for (const [indexStr, text] of Object.entries(SEED_TRANSLATIONS_ES)) {
+    const postId = Number(indexStr) + 1;
+    insertTrans.run(postId, "es", text);
   }
 
   // --- Directory entries ---
@@ -747,6 +947,94 @@ export function seedDatabase() {
       category: "services",
       hood: "east-harlem",
       address: "116th Street",
+      source: "seed",
+    },
+
+    // Elmhurst
+    {
+      name: "Elmhurst Hospital Community Outreach",
+      description_original:
+        "Free health screenings, vaccinations, and referrals. No insurance needed. Staff speaks Spanish, Chinese, Bengali, Tagalog.",
+      source_lang: "en",
+      category: "health",
+      hood: "elmhurst",
+      address: "Broadway",
+      source: "seed",
+    },
+    {
+      name: "Queens Center ESL Program",
+      description_original:
+        "Clases de ingles gratis lunes y miercoles 6pm. Cerca del Queens Center Mall. Todos son bienvenidos.",
+      source_lang: "es",
+      category: "community",
+      hood: "elmhurst",
+      address: "Queens Blvd",
+      source: "seed",
+    },
+
+    // Chinatown
+    {
+      name: "华埠服务中心 Chinatown Service Center",
+      description_original:
+        "帮忙填表格、翻译文件、报税。免费。说中文就行。周一到周五 9am-5pm。",
+      source_lang: "zh",
+      category: "services",
+      hood: "chinatown",
+      address: "East Broadway",
+      source: "seed",
+    },
+    {
+      name: "Mott Street Tenant Association",
+      description_original:
+        "Free help fighting illegal rent increases and evictions. Walk-in. Cantonese, Mandarin, English.",
+      source_lang: "en",
+      category: "services",
+      hood: "chinatown",
+      address: "Mott Street",
+      source: "seed",
+    },
+
+    // Brighton Beach
+    {
+      name: "Русский книжный магазин Russian Bookstore",
+      description_original:
+        "Книги, газеты, помощь с переводом документов. Также помогают с заполнением форм.",
+      source_lang: "ru",
+      category: "services",
+      hood: "brighton-beach",
+      address: "Brighton Beach Ave",
+      source: "seed",
+    },
+    {
+      name: "Brighton Beach Free Legal Aid",
+      description_original:
+        "Бесплатная юридическая помощь по четвергам 3-6pm. Иммиграция, жилье, трудовые права. Русский и английский.",
+      source_lang: "ru",
+      category: "services",
+      hood: "brighton-beach",
+      address: "Brighton Beach Ave",
+      source: "seed",
+    },
+
+    // Fordham
+    {
+      name: "Bronx Legal Services - Fordham",
+      description_original:
+        "Free legal clinic every Tuesday. Immigration, housing, labor. No appointment, no ID needed. Spanish, Arabic, English.",
+      source_lang: "en",
+      category: "services",
+      hood: "fordham",
+      address: "Fordham Road",
+      source: "seed",
+    },
+    {
+      name: "Clinica del Pueblo Fordham",
+      description_original:
+        "Atencion medica gratuita sin seguro. No piden papeles. Hablan espanol. Grand Concourse cerca de Fordham Road.",
+      source_lang: "es",
+      category: "health",
+      hood: "fordham",
+      address: "Grand Concourse",
       source: "seed",
     },
   ];
