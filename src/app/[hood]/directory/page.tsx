@@ -3,9 +3,18 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { NEIGHBORHOODS } from "@/lib/neighborhoods";
+import { NEIGHBORHOODS, SUPPORTED_LANGUAGES } from "@/lib/neighborhoods";
 import { DirectoryCard } from "@/components/DirectoryCard";
 import { LanguagePicker } from "@/components/LanguagePicker";
+
+function detectLang(): string {
+  if (typeof navigator === "undefined") return "en";
+  const raw = navigator.language || "en";
+  const prefix = raw.split("-")[0].toLowerCase();
+  const supported = SUPPORTED_LANGUAGES.map((l) => l.code);
+  if (supported.includes(prefix)) return prefix;
+  return "en";
+}
 
 interface DirectoryEntry {
   id: number;
@@ -27,6 +36,10 @@ export default function DirectoryPage() {
   const [category, setCategory] = useState("all");
   const [viewerLang, setViewerLang] = useState("en");
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setViewerLang(detectLang());
+  }, []);
 
   const neighborhood = NEIGHBORHOODS.find((n) => n.slug === hood);
 

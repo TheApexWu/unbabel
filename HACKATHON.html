@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UnBabel -- Build for the Border Hackathon</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', Courier, monospace;
+    color: #1a1a1a;
+    background: #fff;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px;
+    line-height: 1.6;
+    font-size: 14px;
+  }
+  h1 { font-size: 22px; margin-bottom: 4px; }
+  h2 { font-size: 18px; margin-top: 36px; margin-bottom: 12px; border-bottom: 2px solid #1a1a1a; padding-bottom: 4px; }
+  h3 { font-size: 15px; margin-top: 24px; margin-bottom: 8px; }
+  p { margin-bottom: 12px; }
+  strong { font-weight: bold; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 28px 0; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 16px; }
+  th, td { border: 1px solid #999; padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: #eee; font-weight: bold; }
+  pre {
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 12px 16px;
+    overflow-x: auto;
+    margin-bottom: 16px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  code { font-family: 'Courier New', Courier, monospace; font-size: 13px; }
+  .inline-code { background: #f0f0f0; padding: 1px 4px; border: 1px solid #ddd; }
+  ul, ol { margin-left: 24px; margin-bottom: 12px; }
+  li { margin-bottom: 4px; }
+  .timestamp { color: #666; font-size: 12px; margin-bottom: 24px; }
+  .zhang-box {
+    border: 3px solid #d35400;
+    background: #fdf2e9;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .zhang-box h3 { margin-top: 0; color: #d35400; }
+  .oneliner { background: #f9f9f9; border-left: 4px solid #333; padding: 8px 16px; margin: 12px 0; }
+  a { color: #2c3e50; }
+</style>
+</head>
+<body>
+
+<h1>UnBabel -- Build for the Border Hackathon</h1>
+<p class="timestamp">Generated: May 9 2026 | Last content update: May 9 2026, 2:15 PM ET</p>
+
+<hr>
+
+<h2>What Is This</h2>
+
+<p><strong>A neighborhood bulletin board where language doesn't matter.</strong></p>
+
+<p>NYC has 800 languages. WeChat, WhatsApp, KakaoTalk connect people vertically (Chinese to Chinese, Dominican to Dominican). UnBabel connects horizontally -- everyone on the same block, regardless of language.</p>
+
+<p>Post in any language. Read in yours. The system detects when multiple languages mention the same person, place, or issue -- and surfaces it as a signal. Nobody voted. Nobody moderated. Independent corroboration across language barriers.</p>
+
+<div class="oneliner"><strong>One-liner:</strong> "Three people post about the same landlord in three languages. None of them can read each other. UnBabel connects the dots."</div>
+
+<hr>
+
+<h2>Team</h2>
+
+<table>
+<tr><th>Name</th><th>GitHub</th><th>Role</th></tr>
+<tr><td>Alex Wu</td><td>TheApexWu</td><td>Architect, lead dev, pitch</td></tr>
+<tr><td>Isayah</td><td>isayahc</td><td>Frontend auditor, feature branches</td></tr>
+<tr><td>Song</td><td>ysongh</td><td>Backend auditor, feature branches</td></tr>
+<tr><td>Moyan</td><td>vava484</td><td>Data analytics (ex-Meta)</td></tr>
+<tr><td>Xinning Zhang</td><td>xinningzhang</td><td>VC, pitch/strategy, co-presenter</td></tr>
+</table>
+
+<div class="zhang-box">
+<h3>Zhang's Role (READ THIS XINNING)</h3>
+
+<p>You are co-presenting. You need to understand:</p>
+
+<ol>
+<li><strong>What the product does:</strong> People post neighborhood tips/warnings in any language. The system translates everything so everyone reads in their own language. When 3+ languages independently mention the same landlord/clinic/issue, UnBabel surfaces a SIGNAL CARD -- a cross-language pattern nobody could see alone.</li>
+
+<li><strong>Why it matters:</strong> Immigrants already have community groups (WhatsApp, WeChat). But those are siloed by language. The Bengali group and the Mexican group in the same building never cross. UnBabel is the only place where their signals merge.</li>
+
+<li><strong>The trust model:</strong> "We don't moderate. We don't vote. Three strangers who can't read each other named the same landlord independently. That's not an accusation -- that's a pattern. UnBabel doesn't ask you to trust people. It asks you to trust the math."</li>
+
+<li><strong>Key pitch lines:</strong>
+  <ul>
+    <li>"Every other project builds tools for immigrants to interact with systems. We built a tool for immigrants to interact with each other."</li>
+    <li>"The neighborhood is talking. Now everyone on the block hears the same thing."</li>
+    <li>"This pattern was invisible until 6 communities reported independently."</li>
+  </ul>
+</li>
+
+<li><strong>Q&amp;A you might field:</strong>
+  <ul>
+    <li>"Why not just use Google Translate?" -- Google translates text. We translate neighborhoods. The signal detection is what no translation tool does.</li>
+    <li>"How do you get users?" -- Partner with one church, one legal clinic. They already have multilingual foot traffic and paper bulletin boards. We digitize what's already happening.</li>
+    <li>"What about fake reports?" -- You can't fake cross-language corroboration. You'd need multiple phones AND fluency in multiple languages AND the AI would have to extract matching entities.</li>
+  </ul>
+</li>
+</ol>
+</div>
+
+<hr>
+
+<h2>What's Built (as of 2:15 PM May 9)</h2>
+
+<h3>Architecture</h3>
+
+<pre>Next.js 16 + SQLite (better-sqlite3) + Tailwind CSS
+                    |
+            Single LLM inference call per post
+    (detect + translate + PII strip + moderate + entity extract + topic + cultural note)
+                    |
+            Featherless.ai (Qwen2.5-72B, sponsor credits) OR Ollama (local fallback)
+                    |
+            Cross-language entity clustering (SQL)
+                    |
+            Tavily web search enrichment (sponsor credits)</pre>
+
+<h3>Current Stats</h3>
+
+<ul>
+<li>8 neighborhoods, 54 seed posts, 23 directory entries</li>
+<li>13 languages: EN, ES, ZH, KO, RU, BN, HI, AR, TL, NE, EL, PT, FR</li>
+<li>10+ active signal clusters in Jackson Heights alone</li>
+<li>"free esl" signal: 6 languages, 8 independent reports</li>
+</ul>
+
+<h3>Pages</h3>
+
+<table>
+<tr><th>Route</th><th>What it does</th></tr>
+<tr><td><span class="inline-code">/</span></td><td>Homepage. Craigslist-style neighborhood links with post/language counts.</td></tr>
+<tr><td><span class="inline-code">/[hood]</span></td><td><strong>Signals-first feed.</strong> Cross-language patterns as hero content. Posts collapsed below as "raw reports."</td></tr>
+<tr><td><span class="inline-code">/[hood]/directory</span></td><td>Business/org directory with language switching.</td></tr>
+<tr><td><span class="inline-code">/tower/[alias]</span></td><td>Personal bookmarks organized by topic floors. Persistent.</td></tr>
+</table>
+
+<h3>API Routes</h3>
+
+<table>
+<tr><th>Route</th><th>Method</th><th>What it does</th></tr>
+<tr><td><span class="inline-code">/api/post</span></td><td>POST</td><td>Submit report. Full LLM pipeline. Returns processing receipt.</td></tr>
+<tr><td><span class="inline-code">/api/feed</span></td><td>GET</td><td>Posts for neighborhood(s) + bleed-in from adjacent.</td></tr>
+<tr><td><span class="inline-code">/api/translate</span></td><td>GET</td><td>On-demand translation. Cached.</td></tr>
+<tr><td><span class="inline-code">/api/signals</span></td><td>GET</td><td>Cross-language signal clusters + cross-neighborhood signals.</td></tr>
+<tr><td><span class="inline-code">/api/enrich</span></td><td>GET</td><td>Tavily web search for signal context (news, complaints, records).</td></tr>
+<tr><td><span class="inline-code">/api/bookmarks</span></td><td>GET/POST</td><td>Tower bookmark management.</td></tr>
+<tr><td><span class="inline-code">/api/seed</span></td><td>POST</td><td>Seed DB with demo data.</td></tr>
+<tr><td><span class="inline-code">/api/directory</span></td><td>GET</td><td>Directory listings by neighborhood + category.</td></tr>
+<tr><td><span class="inline-code">/api/translate-directory</span></td><td>POST</td><td>Directory entry translation with caching.</td></tr>
+<tr><td><span class="inline-code">/api/stats</span></td><td>GET</td><td>Post count + language count per neighborhood.</td></tr>
+</table>
+
+<h3>Key Features</h3>
+
+<ol>
+<li><strong>Signals-first layout</strong>: Neighborhood pages open to cross-language signal clusters, not a post feed. Posts are "raw reports" collapsed below. The product is the patterns, not the posts.</li>
+
+<li><strong>Signal strength indicator</strong>: 2 languages = yellow, 3-4 = orange, 5+ = red "NEIGHBORHOOD CONSENSUS." Visual gravity of cross-language agreement.</li>
+
+<li><strong>Cross-neighborhood signals</strong>: Entities appearing in 2+ neighborhoods get a red "CITY-LEVEL SIGNAL" card. Serial predators can't hide behind geographic silos.</li>
+
+<li><strong>Privacy-safe language badges</strong>: Language badges on signals only show when 2+ posts exist in that language. Prevents "only Bengali speaker in the building" identification.</li>
+
+<li><strong>Tavily enrichment</strong>: Click "enrich" on a signal to pull real web context (news, complaints, public records) via Tavily API.</li>
+
+<li><strong>Auto-detect viewer language</strong>: Browser locale auto-sets reading language. A Spanish speaker's phone shows everything in Spanish automatically.</li>
+
+<li><strong>Single-inference pipeline</strong>: One LLM call per post does 7 things: language detection, meaning-based translation, PII stripping, immigrant-aware moderation, topic tagging, entity extraction, cultural notes.</li>
+
+<li><strong>Voice input</strong>: WebSpeech API. Click "speak," select language, talk.</li>
+
+<li><strong>Processing receipt</strong>: Green card flashes after posting showing full pipeline output.</li>
+
+<li><strong>Tower</strong>: Bookmarked posts organized by topic floors. Posts in tower don't expire.</li>
+
+<li><strong>Bleed-in</strong>: Posts from adjacent neighborhoods appear with purple border.</li>
+
+<li><strong>Anonymous identity</strong>: Phone hash -> deterministic alias. Never stored. Never reversible.</li>
+
+<li><strong>Collective leverage copy</strong>: Each signal card shows "This pattern was invisible until N communities reported independently."</li>
+</ol>
+
+<h3>Trust Model</h3>
+
+<ul>
+<li><strong>Cross-language corroboration IS validation.</strong> One person saying "this landlord steals deposits" is an accusation. Three people in three languages who can't read each other is corroboration.</li>
+<li><strong>One phone = one alias.</strong> Can't sock-puppet without multiple phones.</li>
+<li><strong>Tenure badges.</strong> New/settled/rooted/born -- time-weighted credibility.</li>
+<li><strong>7-day expiry.</strong> Stale accusations die automatically.</li>
+<li><strong>PII stripping.</strong> Phone never stored. Names/numbers stripped from post text.</li>
+<li><strong>Privacy-safe badges.</strong> Languages with only 1 post in a signal are hidden to protect small-community speakers.</li>
+<li><strong>No voting. No moderation. No algorithm.</strong> The math does the work.</li>
+</ul>
+
+<h3>Immigrant-Aware Moderation</h3>
+
+<p>Standard moderation flags these as dangerous. UnBabel marks them SAFE:</p>
+<ul>
+<li>"ICE was spotted at the subway station" (safety warning, not threat)</li>
+<li>"Does anyone know a cash job?" (survival, not fraud)</li>
+<li>"The landlord hasn't fixed the heat in 2 weeks" (legitimate complaint)</li>
+</ul>
+
+<p>Only UNSAFE: direct threats, doxxing, hate speech targeting specific groups.</p>
+
+<hr>
+
+<h2>Database Tables</h2>
+
+<table>
+<tr><th>Table</th><th>Purpose</th></tr>
+<tr><td><span class="inline-code">posts</span></td><td>Core posts. 7-day expiry, flagging, tenure.</td></tr>
+<tr><td><span class="inline-code">translations</span></td><td>Cache of translated text per post per language.</td></tr>
+<tr><td><span class="inline-code">entities</span></td><td>Extracted entities (street, business, org, issue) per post. Powers signal detection.</td></tr>
+<tr><td><span class="inline-code">bookmarks</span></td><td>User bookmarks with topic label. Powers Tower.</td></tr>
+<tr><td><span class="inline-code">directory</span></td><td>Business/org listings per neighborhood.</td></tr>
+<tr><td><span class="inline-code">directory_translations</span></td><td>Translation cache for directory entries.</td></tr>
+</table>
+
+<hr>
+
+<h2>Files</h2>
+
+<pre>src/
+  app/
+    page.tsx                    # Homepage
+    layout.tsx                  # Shell: Courier Prime font, purple bars
+    [hood]/
+      page.tsx                  # Signals-first feed + cross-hood signals
+      directory/page.tsx        # Business directory with lang switching
+    tower/[alias]/page.tsx      # Personal tower
+    api/
+      post/route.ts             # Post submission pipeline
+      feed/route.ts             # Feed query
+      translate/route.ts        # On-read translation
+      translate-directory/route.ts # Directory translation
+      signals/route.ts          # Signal detection + cross-hood signals
+      enrich/route.ts           # Tavily web search enrichment
+      bookmarks/route.ts        # Tower bookmarks
+      seed/route.ts             # DB seeding
+      directory/route.ts        # Directory query
+      stats/route.ts            # Neighborhood stats
+  components/
+    PostCard.tsx                # Post with translation, bleed-in, bookmark
+    PostForm.tsx                # Report form with voice input + receipt
+    SignalCard.tsx              # Signal card with strength, expansion, enrich
+    LanguagePicker.tsx          # Language dropdown
+    DirectoryCard.tsx           # Directory entry
+    TenureBadge.tsx             # Tenure indicator
+  lib/
+    db.ts                       # SQLite schema + all queries
+    translate.ts                # Dual-backend LLM pipeline
+    tavily.ts                   # Tavily search client
+    neighborhoods.ts            # 8 neighborhoods, adjacency graph, 13 languages
+    seed.ts                     # 54 demo posts + 23 directory entries + entities
+    identity.ts                 # Phone hash -&gt; anonymous alias
+  types/
+    speech.d.ts                 # WebSpeech API types</pre>
+
+<hr>
+
+<h2>How to Run</h2>
+
+<pre># Install
+cd unbabel &amp;&amp; npm install
+
+# Production (use for demo -- much faster than dev)
+npm run build &amp;&amp; npm start
+
+# Seed database (run once after first start)
+curl -X POST http://localhost:3000/api/seed
+
+# Env vars (create .env.local in project root)
+# Ask Alex for keys
+FEATHERLESS_API_KEY=...   # LLM inference
+TAVILY_API_KEY=...        # Web search enrichment</pre>
+
+<hr>
+
+<h2>Git Workflow</h2>
+
+<p><strong>Everyone works on their own branch. Never push directly to main.</strong></p>
+
+<pre>git clone https://github.com/TheApexWu/unbabel.git
+cd unbabel &amp;&amp; npm install
+git checkout -b your-name/feature-name
+
+# Work, commit, push
+git add .
+git commit -m "what you did"
+git push -u origin your-name/feature-name</pre>
+
+<hr>
+
+<h2>Pitch Script (3 min)</h2>
+
+<p><strong>Open (15 sec):</strong> "My mom immigrated to the US and found jobs, English classes, and legal help through diverse churches -- not just Chinese ones. But she had to walk through the door and speak the right language. UnBabel makes the door visible."</p>
+
+<p><strong>Signal detection (30 sec):</strong> Open Jackson Heights. Point to the "free esl" signal: "8 reports across 6 languages -- Spanish, Tagalog, Chinese, Russian, Korean, Bengali. Six communities that can't read each other all searching for the same thing. This pattern was invisible until they all posted on the same board."</p>
+
+<p><strong>Live demo (60 sec):</strong> Type or speak a post. Watch it translate. Switch the language picker. Show the processing receipt. Click a signal card -- expand to see the raw reports in their original languages.</p>
+
+<p><strong>Subversive moment (30 sec):</strong> "A landlord on 37th Ave charges hidden fees. Reported in English, Bengali, Tagalog, and Nepali. Four languages, four independent warnings. The landlord relied on language barriers to keep complaints isolated. UnBabel ended that."</p>
+
+<p><strong>Trust model (15 sec):</strong> "We don't moderate. We don't vote. Three strangers who can't read each other named the same landlord independently. That's not an accusation -- that's a pattern."</p>
+
+<p><strong>Close (15 sec):</strong> "Every other project builds tools for immigrants to interact with systems. We built a tool for immigrants to interact with each other."</p>
+
+<hr>
+
+<h2>Judging Criteria (5 pts each, 20 total)</h2>
+
+<ol>
+<li><strong>Design</strong> -- UX, visual intentionality</li>
+<li><strong>Uniqueness</strong> -- sharp non-obvious angle, real problem</li>
+<li><strong>Technical Execution</strong> -- does it work, how much shipped</li>
+<li><strong>Storytelling &amp; Pitch</strong> -- 3-min demo, live demo tightness</li>
+</ol>
+
+<hr>
+
+<h2>Sponsors Used</h2>
+
+<ul>
+<li><strong>Featherless.ai</strong> ($500 credits): LLM inference backend (Qwen2.5-72B)</li>
+<li><strong>Tavily</strong> ($15K credits): Web search enrichment for signals</li>
+</ul>
+
+</body>
+</html>

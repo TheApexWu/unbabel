@@ -198,6 +198,36 @@ export function getSignalClusters(
   return stmt.all(...allHoods) as SignalCluster[];
 }
 
+export interface CrossHoodSignal {
+  entity_value: string;
+  entity_type: string;
+  hood_count: number;
+  post_count: number;
+  hoods: string;
+  languages: string;
+}
+
+export function getCrossHoodSignals(): CrossHoodSignal[] {
+  const stmt = db.prepare(`
+    SELECT
+      e.entity_value,
+      e.entity_type,
+      COUNT(DISTINCT e.hood) as hood_count,
+      COUNT(DISTINCT e.post_id) as post_count,
+      GROUP_CONCAT(DISTINCT e.hood) as hoods,
+      GROUP_CONCAT(DISTINCT e.source_lang) as languages
+    FROM entities e
+    JOIN posts p ON e.post_id = p.id
+    WHERE p.flagged = 0
+      AND p.expires_at > datetime('now')
+    GROUP BY e.entity_value
+    HAVING COUNT(DISTINCT e.hood) >= 2
+    ORDER BY hood_count DESC, post_count DESC
+    LIMIT 5
+  `);
+  return stmt.all() as CrossHoodSignal[];
+}
+
 export function getPostsByIds(ids: number[]) {
   if (ids.length === 0) return [];
   const placeholders = ids.map(() => "?").join(",");
