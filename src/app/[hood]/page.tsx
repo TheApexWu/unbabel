@@ -8,6 +8,7 @@ import { PostCard } from "@/components/PostCard";
 import { SignalCard } from "@/components/SignalCard";
 import { LanguagePicker } from "@/components/LanguagePicker";
 import { PostForm } from "@/components/PostForm";
+import { t } from "@/lib/ui-strings";
 
 function detectLang(): string {
   if (typeof navigator === "undefined") return "en";
@@ -135,7 +136,7 @@ export default function HoodFeed() {
       <div className="flex flex-wrap items-center justify-between mb-4 border-b border-gray-300 pb-3">
         <div>
           <Link href="/" className="text-xs text-gray-400 hover:text-purple-800">
-            &larr; all neighborhoods
+            &larr; {t(viewerLang, "allNeighborhoods")}
           </Link>
           <h1 className="text-2xl font-bold text-purple-800" style={{ fontFamily: "Georgia, serif" }}>
             {neighborhood.name}
@@ -148,11 +149,11 @@ export default function HoodFeed() {
               href={`/tower/${viewerAlias}`}
               className="text-xs text-purple-800 underline hover:text-purple-600"
             >
-              my tower
+              {t(viewerLang, "myTower")}
             </Link>
           )}
           <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-400">reading in:</span>
+            <span className="text-xs text-gray-400">{t(viewerLang, "readingIn")}</span>
             <LanguagePicker current={viewerLang} onChange={setViewerLang} />
           </div>
         </div>
@@ -161,13 +162,13 @@ export default function HoodFeed() {
       {/* Nav */}
       <div className="flex gap-4 mb-4 text-sm border-b border-gray-200 pb-2">
         <span className="text-purple-800 font-bold border-b-2 border-purple-800 pb-1">
-          signals
+          {t(viewerLang, "signals")}
         </span>
         <Link
           href={`/${hood}/directory`}
           className="text-gray-500 hover:text-purple-800"
         >
-          directory
+          {t(viewerLang, "directory")}
         </Link>
       </div>
 
@@ -177,14 +178,14 @@ export default function HoodFeed() {
       ) : signals.length > 0 ? (
         <div className="space-y-4 mb-8">
           <p className="text-sm text-gray-600 font-mono mb-3">
-            these people cannot read each other. the system connected them.
+            {t(viewerLang, "crossLangHeader")}
           </p>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xs text-gray-500 font-mono uppercase tracking-wide">
-              cross-language patterns detected
+              {t(viewerLang, "patternsDetected")}
             </span>
             <span className="text-xs text-gray-400 font-mono">
-              {signals.length} active
+              {signals.length} {t(viewerLang, "active")}
             </span>
           </div>
           {signals.map((signal, i) => (
@@ -193,9 +194,9 @@ export default function HoodFeed() {
         </div>
       ) : (
         <div className="border-2 border-dashed border-gray-300 p-6 mb-8 text-center font-mono">
-          <p className="text-gray-500 text-sm mb-1">no cross-language patterns yet</p>
+          <p className="text-gray-500 text-sm mb-1">{t(viewerLang, "noPatterns")}</p>
           <p className="text-gray-400 text-xs">
-            when multiple languages mention the same person, place, or issue, it surfaces here.
+            {t(viewerLang, "noPatternsDesc")}
           </p>
         </div>
       )}
@@ -270,9 +271,9 @@ export default function HoodFeed() {
       {/* Report form */}
       <div className="mb-6">
         <p className="text-xs text-gray-500 font-mono mb-2 uppercase tracking-wide">
-          report something
+          {t(viewerLang, "reportSomething")}
         </p>
-        <PostForm hood={hood} onPosted={handlePosted} />
+        <PostForm hood={hood} onPosted={handlePosted} viewerLang={viewerLang} />
       </div>
 
       {/* Raw reports -- collapsed by default */}
@@ -285,7 +286,7 @@ export default function HoodFeed() {
             &#9654;
           </span>
           <span className="uppercase tracking-wide">
-            raw reports ({postCount} posts, {langSet.size} languages)
+            {t(viewerLang, "rawReports")} ({postCount} {t(viewerLang, "posts")}, {langSet.size} {t(viewerLang, "languages")})
           </span>
         </button>
 

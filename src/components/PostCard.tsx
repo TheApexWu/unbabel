@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { TenureBadge } from "./TenureBadge";
+import { t } from "@/lib/ui-strings";
 
 interface Post {
   id: number;
@@ -134,7 +135,7 @@ export function PostCard({
         <span>{timeAgo(post.created_at)}</span>
         {isBleed && (
           <span className="ml-auto text-purple-600 text-xs">
-            from {post.hood.replace(/-/g, " ")}
+            {t(viewerLang, "from")} {post.hood.replace(/-/g, " ")}
           </span>
         )}
         {/* Bookmark button */}
@@ -147,7 +148,7 @@ export function PostCard({
                 : "bg-white text-gray-500 border-gray-300 hover:border-purple-400"
             }`}
           >
-            {saved ? "saved" : "save"}
+            {saved ? t(viewerLang, "saved") : t(viewerLang, "save")}
           </button>
         )}
       </div>
@@ -155,13 +156,13 @@ export function PostCard({
       {/* Topic picker for bookmark */}
       {showTopicPicker && (
         <div className="flex flex-wrap gap-1 mb-2">
-          {TOPIC_OPTIONS.map((t) => (
+          {TOPIC_OPTIONS.map((topic) => (
             <button
-              key={t}
-              onClick={() => handleBookmark(t)}
+              key={topic}
+              onClick={() => handleBookmark(topic)}
               className="text-xs px-2 py-0.5 border border-gray-300 bg-white text-gray-600 hover:bg-purple-100 hover:border-purple-400"
             >
-              {t}
+              {topic}
             </button>
           ))}
         </div>
@@ -175,7 +176,7 @@ export function PostCard({
           onClick={handleTranslate}
           className="text-xs text-purple-600 hover:text-purple-800 mt-1 font-mono"
         >
-          translate
+          {t(viewerLang, "translate")}
         </button>
       )}
     </div>

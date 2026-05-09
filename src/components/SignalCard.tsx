@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { t } from "@/lib/ui-strings";
 
 const LANG_NAMES: Record<string, string> = {
   en: "English", es: "Spanish", zh: "Chinese", ko: "Korean",
@@ -66,7 +67,7 @@ function getComplaintUrl(entityType: string, entityValue: string): { url: string
   return { url: "https://portal.311.nyc.gov/", label: "file complaint with NYC 311" };
 }
 
-function SignalStrength({ langCount }: { langCount: number }) {
+function SignalStrength({ langCount, viewerLang = "en" }: { langCount: number; viewerLang?: string }) {
   const barClass = "inline-block w-1.5 h-4 rounded-sm mr-0.5";
   if (langCount >= 5) {
     return (
@@ -77,7 +78,7 @@ function SignalStrength({ langCount }: { langCount: number }) {
           <span className={`${barClass} bg-red-500 h-4`} />
         </span>
         <span className="text-[10px] font-bold text-red-700 uppercase tracking-wide">
-          strong corroboration
+          {t(viewerLang, "strongCorroboration")}
         </span>
       </span>
     );
@@ -97,7 +98,7 @@ function SignalStrength({ langCount }: { langCount: number }) {
   );
 }
 
-export function SignalCard({ signal, hood, viewerLang, defaultExpanded = false }: { signal: Signal; hood?: string; viewerLang?: string; defaultExpanded?: boolean }) {
+export function SignalCard({ signal, hood, viewerLang = "en", defaultExpanded = false }: { signal: Signal; hood?: string; viewerLang?: string; defaultExpanded?: boolean }) {
   const [expanded, setExpanded] = useState(defaultExpanded);
   const [enrichResults, setEnrichResults] = useState<EnrichResult[] | null>(null);
   const [enrichLoading, setEnrichLoading] = useState(false);
@@ -135,28 +136,28 @@ export function SignalCard({ signal, hood, viewerLang, defaultExpanded = false }
       <div className="p-4">
         <div className="flex items-center gap-2 mb-1">
           <span className="bg-amber-400 text-amber-900 text-xs font-bold px-2 py-0.5">
-            SIGNAL
+            {t(viewerLang, "signal")}
           </span>
-          <SignalStrength langCount={signal.lang_count} />
+          <SignalStrength langCount={signal.lang_count} viewerLang={viewerLang} />
           <span className="bg-red-100 text-red-800 text-xs font-bold px-2 py-0.5">
-            {signal.lang_count} languages
+            {signal.lang_count} {t(viewerLang, "languages")}
           </span>
           <span className="text-xs text-amber-700">
             [{typeLabel}]
           </span>
           <span className="ml-auto text-xs text-amber-600">
-            {expanded ? "collapse" : `${signal.post_count} reports`}
+            {expanded ? t(viewerLang, "collapse") : `${signal.post_count} ${t(viewerLang, "reports")}`}
           </span>
         </div>
         <p className="text-amber-900 font-bold text-base mb-2">
           {signal.entity_value}
         </p>
         <p className="text-xs text-amber-700 mb-2">
-          {signal.post_count} independent reports across {signal.lang_count} languages mention this {typeLabel}.
-          Independent reports from people who cannot read each other. Corroboration, not consensus.
+          {signal.post_count} {t(viewerLang, "independentReports")} {signal.lang_count} {t(viewerLang, "languages")} {t(viewerLang, "mentionThis")} {typeLabel}.
+          {t(viewerLang, "corroborationDesc")}
         </p>
         <p className="text-[11px] italic text-amber-800 mb-2">
-          This pattern was invisible until {signal.lang_count} communities reported independently.
+          {t(viewerLang, "invisibleUntil")} {signal.lang_count} {t(viewerLang, "communitiesReported")}
         </p>
         <div className="flex gap-2 flex-wrap">
           {(() => {
@@ -186,7 +187,7 @@ export function SignalCard({ signal, hood, viewerLang, defaultExpanded = false }
                 ))}
                 {hiddenCount > 0 && (
                   <span className="text-xs border border-amber-300 bg-amber-100 px-2 py-0.5 text-amber-600 italic">
-                    +{hiddenCount} other language{hiddenCount > 1 ? "s" : ""}
+                    +{hiddenCount} {t(viewerLang, "otherLanguages")}
                   </span>
                 )}
               </>
@@ -199,7 +200,7 @@ export function SignalCard({ signal, hood, viewerLang, defaultExpanded = false }
       {expanded && signal.posts && signal.posts.length > 0 && (
         <div className="border-t-2 border-amber-300 bg-amber-100/50 p-4 space-y-3">
           <p className="text-xs text-amber-700 font-bold uppercase tracking-wide">
-            contributing reports
+            {t(viewerLang, "contributing")}
           </p>
           {signal.posts.map((post) => (
             <div
@@ -247,7 +248,7 @@ export function SignalCard({ signal, hood, viewerLang, defaultExpanded = false }
                 }}
                 className="mt-2 px-3 py-1.5 bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700 transition-colors"
               >
-                {enrichLoading ? "searching..." : "find more context"}
+                {enrichLoading ? t(viewerLang, "processing") : t(viewerLang, "findMoreContext")}
               </button>
             )}
 
@@ -287,10 +288,10 @@ export function SignalCard({ signal, hood, viewerLang, defaultExpanded = false }
             return (
               <div className="border-t border-amber-300 bg-amber-100/30 p-3 mt-2" onClick={(e) => e.stopPropagation()}>
                 <p className="text-xs text-amber-800 font-bold uppercase tracking-wide mb-2">
-                  take action
+                  {t(viewerLang, "takeAction")}
                 </p>
                 <p className="text-xs text-amber-700 mb-2">
-                  {signal.lang_count} independent communities flagged this. File a formal complaint:
+                  {signal.lang_count} {t(viewerLang, "communitiesFlagged")}
                 </p>
                 <a href={complaint.url} target="_blank" rel="noopener noreferrer"
                    className="inline-block bg-purple-800 text-white text-xs font-mono px-4 py-2 hover:bg-purple-900"

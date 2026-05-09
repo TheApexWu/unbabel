@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
+import { t } from "@/lib/ui-strings";
 
 interface ProcessReceipt {
   detected_language: string;
@@ -38,9 +39,11 @@ const SPEECH_LANGS: { code: string; label: string; speech: string }[] = [
 export function PostForm({
   hood,
   onPosted,
+  viewerLang = "en",
 }: {
   hood: string;
   onPosted: (alias?: string) => void;
+  viewerLang?: string;
 }) {
   const [text, setText] = useState("");
   const [phone, setPhone] = useState("");
@@ -145,17 +148,17 @@ export function PostForm({
         <div className="mb-2">
           <input
             type="text"
-            placeholder="enter any number as your identity key"
+            placeholder={t(viewerLang, "enterIdentity")}
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             className="w-full border border-gray-300 px-2 py-1 text-sm bg-white text-black placeholder:text-gray-500"
           />
           <p className="text-xs text-gray-400 mt-1">
-            hashed into an anonymous alias. never stored. never displayed.
+            {t(viewerLang, "identityExplainer")}
           </p>
         </div>
         <textarea
-          placeholder="report in any language -- a tip, a warning, a question..."
+          placeholder={t(viewerLang, "reportPlaceholder")}
           value={text}
           onChange={(e) => setText(e.target.value)}
           rows={3}
@@ -173,7 +176,7 @@ export function PostForm({
                 : "bg-white text-gray-700 border-gray-400 hover:border-purple-400"
             }`}
           >
-            {listening ? "stop" : "speak"}
+            {listening ? t(viewerLang, "stop") : t(viewerLang, "speak")}
           </button>
           <select
             value={speechLang}
@@ -187,7 +190,7 @@ export function PostForm({
             ))}
           </select>
           {listening && (
-            <span className="text-xs text-red-600">listening...</span>
+            <span className="text-xs text-red-600">{t(viewerLang, "listening")}</span>
           )}
         </div>
 
@@ -197,7 +200,7 @@ export function PostForm({
           disabled={submitting || !text.trim() || !phone.trim()}
           className="bg-purple-800 text-white px-4 py-1 text-sm font-mono hover:bg-purple-900 disabled:opacity-50"
         >
-          {submitting ? "processing..." : "submit report"}
+          {submitting ? t(viewerLang, "processing") : t(viewerLang, "submitReport")}
         </button>
       </form>
 
@@ -205,7 +208,7 @@ export function PostForm({
       {receipt && (
         <div className="mt-2 border border-green-300 bg-green-50 p-3 font-mono text-xs animate-pulse">
           <div className="text-green-800 font-bold mb-1">
-            pipeline receipt
+            {t(viewerLang, "pipelineReceipt")}
           </div>
           <div className="space-y-1 text-green-700">
             <div>
