@@ -148,7 +148,7 @@ export function PostForm({
             placeholder="phone (for anonymous identity only)"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full border border-gray-300 px-2 py-1 text-sm bg-white"
+            className="w-full border border-gray-300 px-2 py-1 text-sm bg-white text-black placeholder:text-gray-500"
           />
           <p className="text-xs text-gray-400 mt-1">
             hashed into an anonymous alias. never stored. never displayed.
@@ -159,7 +159,7 @@ export function PostForm({
           value={text}
           onChange={(e) => setText(e.target.value)}
           rows={3}
-          className="w-full border border-gray-300 px-2 py-1 text-sm bg-white mb-2"
+          className="w-full border border-gray-300 px-2 py-1 text-sm bg-white text-black placeholder:text-gray-500 mb-2"
         />
 
         {/* Voice input controls */}
@@ -178,7 +178,7 @@ export function PostForm({
           <select
             value={speechLang}
             onChange={(e) => setSpeechLang(e.target.value)}
-            className="text-xs border border-gray-300 bg-white px-1 py-1 font-mono"
+            className="text-xs border border-gray-300 bg-white px-1 py-1 font-mono text-black"
           >
             {SPEECH_LANGS.map((l) => (
               <option key={l.code} value={l.speech}>
