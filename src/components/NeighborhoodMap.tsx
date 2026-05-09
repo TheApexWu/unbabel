@@ -95,8 +95,7 @@ export default function NeighborhoodMap() {
   return (
     <div
       ref={mapRef}
-      style={{ height: 400, width: "100%", borderRadius: 4 }}
-      className="border border-gray-300"
+      style={{ height: "100%", minHeight: 400, width: "100%", borderRadius: 0 }}
     />
   );
 }

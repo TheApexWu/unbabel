@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { NEIGHBORHOODS, getAdjacentSlugs, SUPPORTED_LANGUAGES } from "@/lib/neighborhoods";
 import { PostCard } from "@/components/PostCard";
+import { Posts3D } from "@/components/Posts3D";
 import { SignalCard } from "@/components/SignalCard";
 import { LanguagePicker } from "@/components/LanguagePicker";
 import { PostForm } from "@/components/PostForm";
@@ -77,6 +78,7 @@ export default function HoodFeed() {
   const [viewerAlias, setViewerAlias] = useState<string | undefined>();
   const [loading, setLoading] = useState(true);
   const [showRawReports, setShowRawReports] = useState(false);
+  const [view3D, setView3D] = useState(false);
 
   const neighborhood = NEIGHBORHOODS.find((n) => n.slug === hood);
 
@@ -290,23 +292,49 @@ export default function HoodFeed() {
         </button>
 
         {showRawReports && (
-          <div className="space-y-3">
+          <>
+            <div className="flex gap-1 mb-3 font-mono text-xs">
+              <button
+                onClick={() => setView3D(false)}
+                className={`px-3 py-1 border ${
+                  !view3D
+                    ? "bg-purple-800 text-white border-purple-800"
+                    : "bg-white text-gray-600 border-gray-300 hover:border-purple-400"
+                }`}
+              >
+                list
+              </button>
+              <button
+                onClick={() => setView3D(true)}
+                className={`px-3 py-1 border ${
+                  view3D
+                    ? "bg-purple-800 text-white border-purple-800"
+                    : "bg-white text-gray-600 border-gray-300 hover:border-purple-400"
+                }`}
+              >
+                3D
+              </button>
+            </div>
             {posts.length === 0 ? (
               <p className="text-gray-400 text-sm font-mono">
                 no reports yet. be the first.
               </p>
+            ) : view3D ? (
+              <Posts3D posts={posts} viewerLang={viewerLang} />
             ) : (
-              posts.map((post) => (
-                <PostCard
-                  key={post.id}
-                  post={post}
-                  viewerLang={viewerLang}
-                  currentHood={hood}
-                  viewerAlias={viewerAlias}
-                />
-              ))
+              <div className="space-y-3">
+                {posts.map((post) => (
+                  <PostCard
+                    key={post.id}
+                    post={post}
+                    viewerLang={viewerLang}
+                    currentHood={hood}
+                    viewerAlias={viewerAlias}
+                  />
+                ))}
+              </div>
             )}
-          </div>
+          </>
         )}
       </div>
     </main>
