@@ -162,25 +162,57 @@ FEATHERLESS_API_KEY=your_key npm start
 
 ---
 
-## What Needs Building (Hackathon Day)
+## Git Workflow
 
-### Must-have for demo (P0)
-- [ ] Test voice input end-to-end (needs Chrome + localhost or HTTPS)
+**IMPORTANT: Everyone works on their own branch. Never push directly to main.**
+
+```bash
+# Clone and setup
+git clone https://github.com/TheApexWu/unbabel.git
+cd unbabel && npm install
+
+# Create your branch
+git checkout -b your-name/feature-name
+
+# Work, commit, push
+git add .
+git commit -m "what you did"
+git push -u origin your-name/feature-name
+
+# When ready to merge, open a PR on GitHub or tell Alex
+```
+
+**Branch naming:** `yourname/short-description` (e.g. `isayah/tavily-enrichment`, `ysongh/tower-polish`)
+
+**To run locally:**
+```bash
+npm run build && npm start
+# then seed: curl -X POST http://localhost:3000/api/seed
+```
+
+---
+
+## Task List (Unclaimed -- Grab What Fits You)
+
+### P0 -- Must ship for demo
+- [ ] Test voice input end-to-end (Chrome + localhost)
 - [ ] Test posting with Ollama or Featherless -- verify translation quality
-- [ ] Add 2-3 more neighborhoods if time (Astoria, Corona, East Harlem)
-- [ ] Practice the live demo: speak Chinese -> English appears -> signal card updates
+- [ ] Add 2-3 more neighborhoods + seed posts (Astoria, Corona, East Harlem) -- edit `src/lib/neighborhoods.ts` + `src/lib/seed.ts`
+- [ ] Practice live demo: speak Chinese -> English appears -> signal card updates
+- [ ] Write/refine pitch script (see pitch section below)
 
-### Should-have (P1)
-- [ ] Tower visual polish -- make floors look more like a literal tower (blocks stacking)
-- [ ] Add post count / language count to homepage neighborhood links
+### P1 -- Should ship
+- [ ] Tower visual polish -- make floors look more like a literal stacking tower
+- [ ] Add post count / active language count to homepage neighborhood links
 - [ ] Directory entries translate when viewer switches language (currently shows original only)
 - [ ] Neighborhood briefing: one-click AI summary of the week's posts across all languages
+- [ ] More seed posts with real informal knowledge (landlord warnings, cheap services, safety tips)
 
-### Nice-to-have (P2)
-- [ ] Tavily auto-enrichment: detect question posts, surface real local resources
-- [ ] 311 complaint seeding: pull real NYC 311 data as system posts
-- [ ] Search across all translated posts (SQLite FTS5)
-- [ ] Tower sharing: generate a read-only link to your tower for others
+### P2 -- If time allows
+- [ ] Tavily auto-enrichment: detect question posts, surface real local resources (uses sponsor API -- $15K credits prize)
+- [ ] 311 complaint seeding: pull real NYC 311 CSV data as system posts with [311] badge
+- [ ] Cross-lingual search (SQLite FTS5 on translated text)
+- [ ] Tower sharing: generate read-only link to your tower
 
 ---
 
@@ -223,17 +255,6 @@ FEATHERLESS_API_KEY=your_key npm start
 **Technical (30 sec):** "One LLM call per post does seven things: detect language, translate for meaning, strip PII, moderate with immigrant-aware safety rules, extract entities, tag topics, add cultural context notes. That's not Google Translate. That's cultural mediation."
 
 **Close (15 sec):** "Every other project here builds tools for immigrants to interact with systems. We built a tool for immigrants to interact with each other. The neighborhood is talking. Now everyone on the block hears the same thing."
-
----
-
-## Team
-
-| Role | Person | Focus |
-|------|--------|-------|
-| Architect / Lead Dev | Alex | Pipeline, signal detection, voice, infra |
-| SWE | Phillip | Frontend, new neighborhoods, directory |
-| Data | Moyan | Seed data, 311 research, demo content |
-| Strategy / Pitch | Annie | Pitch deck, narrative, judge prep |
 
 ---
 
