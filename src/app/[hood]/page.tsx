@@ -164,12 +164,14 @@ export default function HoodFeed() {
         <span className="text-purple-800 font-bold border-b-2 border-purple-800 pb-1">
           {t(viewerLang, "signals")}
         </span>
-        <Link
-          href={`/${hood}/directory`}
-          className="text-gray-500 hover:text-purple-800"
-        >
-          {t(viewerLang, "directory")}
-        </Link>
+        {viewerLang === "en" && (
+          <Link
+            href={`/${hood}/directory`}
+            className="text-gray-500 hover:text-purple-800"
+          >
+            {t(viewerLang, "directory")}
+          </Link>
+        )}
       </div>
 
       {/* Signals -- HERO SECTION */}
