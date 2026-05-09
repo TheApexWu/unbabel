@@ -753,6 +753,23 @@ export function seedDatabase() {
     51: "181街的教堂有免费英语课。我老婆去了说很好。还帮忙填表格。",
     52: "Flushing图书馆有免费公民身份考试辅导班。俄语、中文、韩语都可以。周六上午去。",
     53: "37th Ave的房产中介别去。签完后加收费用。",
+    // Elmhurst (54-57)
+    54: "Elmhurst的房租涨了300美元，房东什么都不修。有人知道去哪里投诉吗？",
+    55: "Broadway上面新开了一家免费ESL班，周三和周五晚上。老师很有耐心，推荐给刚来的朋友。",
+    56: "Queens Center Mall附近的教堂每周一和周三有免费英语课。适合刚来的新移民。",
+    57: "Elmhurst的房东不修东西，好几个租客都有同样的问题。有人知道租户权益组织吗？",
+    // Chinatown (58-60)
+    59: "华埠的移民律师帮忙办工作许可和绿卡。说中文。不需要预约。",
+    60: "Canal Street那家翻译社帮忙翻译文件，价格公道。也帮忙填表格。",
+    // Brighton Beach (61-63)
+    61: "Brighton Beach大道上的修车铺收费太高。换刹车要800美元，别的地方只要300。",
+    62: "Brighton Beach的社区中心有免费法律咨询。帮忙处理房租、移民和劳工问题。",
+    63: "房租涨了很多，房东不修暖气。有人知道怎么投诉吗？",
+    // Fordham (64-67)
+    64: "Grand Concourse上有免费诊所，不需要保险。说西班牙语。不查身份。",
+    65: "Fordham Road每周二有免费法律咨询。移民、住房、劳工权益都管。不需要预约。",
+    66: "房租涨了300美元，房子需要维修。Fordham Road的法院有免费租户援助。",
+    67: "Grand Concourse上的新药店药价太高。去Kingsbridge那家更好。",
   };
   for (const [indexStr, text] of Object.entries(SEED_TRANSLATIONS_ZH)) {
     const postId = Number(indexStr) + 1;
