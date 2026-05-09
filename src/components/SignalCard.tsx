@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const LANG_NAMES: Record<string, string> = {
   en: "English", es: "Spanish", zh: "Chinese", ko: "Korean",
@@ -51,7 +51,7 @@ function SignalStrength({ langCount }: { langCount: number }) {
           <span className={`${barClass} bg-red-500 h-4`} />
         </span>
         <span className="text-[10px] font-bold text-red-700 uppercase tracking-wide">
-          neighborhood consensus
+          strong corroboration
         </span>
       </span>
     );
@@ -71,10 +71,29 @@ function SignalStrength({ langCount }: { langCount: number }) {
   );
 }
 
-export function SignalCard({ signal, hood }: { signal: Signal; hood?: string }) {
+export function SignalCard({ signal, hood, viewerLang }: { signal: Signal; hood?: string; viewerLang?: string }) {
   const [expanded, setExpanded] = useState(false);
   const [enrichResults, setEnrichResults] = useState<EnrichResult[] | null>(null);
   const [enrichLoading, setEnrichLoading] = useState(false);
+  const [translations, setTranslations] = useState<Record<number, string>>({});
+  // Fetch translations for contributing posts when expanded
+  useEffect(() => {
+    if (!expanded || !viewerLang || !signal.posts) return;
+    for (const post of signal.posts) {
+      if (post.source_lang !== viewerLang && !translations[post.id]) {
+        fetch(`/api/translate?postId=${post.id}&lang=${viewerLang}`)
+          .then((r) => r.json())
+          .then((data) => {
+            if (data.translated_text) {
+              setTranslations((prev) => ({ ...prev, [post.id]: data.translated_text }));
+            }
+          })
+          .catch(() => {});
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [expanded, viewerLang]);
+
   const langs = signal.languages.split(",");
   const typeLabel = TYPE_LABELS[signal.entity_type] ?? signal.entity_type;
 
@@ -168,6 +187,9 @@ export function SignalCard({ signal, hood }: { signal: Signal; hood?: string }) 
                 </span>
               </div>
               <p className="text-gray-800">{post.body_original}</p>
+              {translations[post.id] && (
+                <p className="text-gray-500 text-[11px] mt-1 italic">{translations[post.id]}</p>
+              )}
             </div>
           ))}
 
@@ -195,7 +217,7 @@ export function SignalCard({ signal, hood }: { signal: Signal; hood?: string }) 
                 }}
                 className="mt-2 px-3 py-1.5 bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700 transition-colors"
               >
-                {enrichLoading ? "searching..." : "enrich with web search"}
+                {enrichLoading ? "searching..." : "find more context"}
               </button>
             )}
 

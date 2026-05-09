@@ -145,7 +145,7 @@ export function PostForm({
         <div className="mb-2">
           <input
             type="text"
-            placeholder="phone (for anonymous identity only)"
+            placeholder="enter any number as your identity key"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             className="w-full border border-gray-300 px-2 py-1 text-sm bg-white text-black placeholder:text-gray-500"

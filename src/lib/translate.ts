@@ -101,29 +101,36 @@ async function chatOllama(userMessage: string): Promise<string> {
 }
 
 async function chatFeatherless(userMessage: string): Promise<string> {
-  const res = await fetch(`${FEATHERLESS_URL}/chat/completions`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${FEATHERLESS_KEY}`,
-    },
-    body: JSON.stringify({
-      model: FEATHERLESS_MODEL,
-      messages: [
-        { role: "system", content: SYSTEM_PROMPT },
-        { role: "user", content: userMessage },
-      ],
-      temperature: 0.1,
-      response_format: { type: "json_object" },
-    }),
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+  try {
+    const res = await fetch(`${FEATHERLESS_URL}/chat/completions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${FEATHERLESS_KEY}`,
+      },
+      body: JSON.stringify({
+        model: FEATHERLESS_MODEL,
+        messages: [
+          { role: "system", content: SYSTEM_PROMPT },
+          { role: "user", content: userMessage },
+        ],
+        temperature: 0.1,
+        response_format: { type: "json_object" },
+      }),
+      signal: controller.signal,
+    });
 
-  if (!res.ok) {
-    throw new Error(`Featherless error: ${res.status} ${await res.text()}`);
+    if (!res.ok) {
+      throw new Error(`Featherless error: ${res.status} ${await res.text()}`);
+    }
+
+    const data = await res.json();
+    return data.choices?.[0]?.message?.content ?? "";
+  } finally {
+    clearTimeout(timeout);
   }
-
-  const data = await res.json();
-  return data.choices?.[0]?.message?.content ?? "";
 }
 
 function cleanResponse(content: string): string {
@@ -139,7 +146,7 @@ const DEFAULT_RESULT: ProcessResult = {
   translated_text: "",
   sanitized_original: "",
   pii_found: [],
-  is_safe: true,
+  is_safe: false,
   flagged_reason: null,
   topics: [],
   cultural_note: null,

@@ -28,6 +28,9 @@ export default function Home() {
         <p className="text-sm text-gray-500">
           the neighborhood is talking. hear it out.
         </p>
+        <p className="text-xs text-gray-400 mt-2 max-w-md mx-auto">
+          A multilingual bulletin board that detects when immigrant communities across language barriers report the same person, place, or problem.
+        </p>
       </div>
 
       <div className="border border-gray-300 bg-white p-4">
@@ -48,7 +51,7 @@ export default function Home() {
                 <span className="text-xs text-gray-400">{hood.borough}</span>
                 {s && s.posts > 0 && (
                   <span className="text-xs text-gray-400 ml-auto">
-                    {s.posts} posts / {s.languages} lang
+                    {s.posts} posts / {s.languages} languages
                   </span>
                 )}
               </div>

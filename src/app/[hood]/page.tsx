@@ -66,6 +66,8 @@ export default function HoodFeed() {
 
   useEffect(() => {
     setViewerLang(detectLang());
+    const saved = localStorage.getItem("unbabel_alias");
+    if (saved) setViewerAlias(saved);
   }, []);
   const [viewerAlias, setViewerAlias] = useState<string | undefined>();
   const [loading, setLoading] = useState(true);
@@ -101,7 +103,10 @@ export default function HoodFeed() {
   }, [loadPosts]);
 
   const handlePosted = useCallback((alias?: string) => {
-    if (alias) setViewerAlias(alias);
+    if (alias) {
+      setViewerAlias(alias);
+      localStorage.setItem("unbabel_alias", alias);
+    }
     loadPosts();
   }, [loadPosts]);
 
@@ -122,7 +127,7 @@ export default function HoodFeed() {
   return (
     <main className="max-w-2xl mx-auto px-4 py-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4 border-b border-gray-300 pb-3">
+      <div className="flex flex-wrap items-center justify-between mb-4 border-b border-gray-300 pb-3">
         <div>
           <Link href="/" className="text-xs text-gray-400 hover:text-purple-800">
             &larr; all neighborhoods
@@ -175,7 +180,7 @@ export default function HoodFeed() {
             </span>
           </div>
           {signals.map((signal) => (
-            <SignalCard key={signal.entity_value} signal={signal} hood={hood} />
+            <SignalCard key={signal.entity_value} signal={signal} hood={hood} viewerLang={viewerLang} />
           ))}
         </div>
       ) : (

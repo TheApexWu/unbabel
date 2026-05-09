@@ -14,6 +14,13 @@ function getDatabase(): Database.Database {
     globalForDb._db.pragma("journal_mode = WAL");
     globalForDb._db.pragma("busy_timeout = 5000");
     globalForDb._db.exec(SCHEMA);
+
+    // Auto-seed if DB is empty
+    const count = globalForDb._db.prepare("SELECT COUNT(*) as c FROM posts").get() as { c: number };
+    if (count.c === 0) {
+      const { seedDatabase } = require("./seed");
+      seedDatabase();
+    }
   }
   return globalForDb._db;
 }
