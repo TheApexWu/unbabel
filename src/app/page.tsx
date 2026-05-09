@@ -2,7 +2,17 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { NEIGHBORHOODS } from "@/lib/neighborhoods";
+
+const HoodMap = dynamic(() => import("@/components/map/HoodMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[360px] border border-gray-300 bg-gray-50 flex items-center justify-center text-xs text-gray-400">
+      loading map…
+    </div>
+  ),
+});
 
 export default function Home() {
   const [stats, setStats] = useState<
@@ -30,6 +40,13 @@ export default function Home() {
         </p>
         <p className="text-xs text-gray-400 mt-2 max-w-md mx-auto">
           A multilingual bulletin board that detects when immigrant communities across language barriers report the same person, place, or problem.
+        </p>
+      </div>
+
+      <div className="mb-4">
+        <HoodMap />
+        <p className="text-xs text-gray-400 mt-2 text-center">
+          8 neighborhoods. 13 languages. click a dot.
         </p>
       </div>
 
