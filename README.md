@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UnBabel
 
-## Getting Started
+**A neighborhood bulletin board where language doesn't matter.**
 
-First, run the development server:
+Three people post about the same landlord in three languages. None of them can read each other. UnBabel connects the dots.
+
+## What It Does
+
+Post in any language. Read in yours. When multiple languages independently mention the same person, place, or issue, UnBabel surfaces it as a signal -- a cross-language pattern nobody could see alone.
+
+- 8 NYC neighborhoods, 13 languages
+- Cross-language signal detection (entity clustering)
+- Signal strength: 2 languages = pattern, 5+ = neighborhood consensus
+- Cross-neighborhood tracking: serial predators can't hide behind geography
+- Voice input, anonymous identity, 7-day post expiry
+- Tavily web enrichment for real-world context on signals
+
+## How to Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run build && npm start
+curl -X POST http://localhost:3000/api/seed
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create `.env.local` with API keys (ask Alex):
+```
+FEATHERLESS_API_KEY=...
+TAVILY_API_KEY=...
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Trust Model
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+We don't moderate. We don't vote. Independent corroboration across language barriers IS the validation. You can't fake a cross-language signal.
 
-## Learn More
+## Team
 
-To learn more about Next.js, take a look at the following resources:
+Built at Build for the Border hackathon, May 9 2026.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [HACKATHON.md](HACKATHON.md) for full documentation.
