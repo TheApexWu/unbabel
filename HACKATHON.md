@@ -2,13 +2,11 @@
 
 ## What Is This
 
-Neighborhood intelligence platform that erases language barriers.
+**A neighborhood bulletin board where language doesn't matter.**
 
 NYC has 800 languages. WeChat, WhatsApp, KakaoTalk connect people vertically (Chinese to Chinese, Dominican to Dominican). UnBabel connects horizontally -- everyone on the same block, regardless of language.
 
-Core thesis: **"Community accountability infrastructure for neighborhoods that don't share a language."**
-
-Three people post in three languages about the same landlord. None can read each other. UnBabel connects the dots.
+Post in any language. Read in yours. Patterns emerge when multiple languages mention the same landlord, clinic, or warning -- and a signal card surfaces it. Save what matters to your personal Tower.
 
 ---
 
@@ -192,21 +190,35 @@ npm run build && npm start
 
 ---
 
+## Current State (what's already done)
+
+- [x] 8 neighborhoods: Jackson Heights, Flushing, Washington Heights, Sunset Park, Bushwick, Astoria, Corona, East Harlem
+- [x] 34 seed posts in 13 languages (EN, ES, ZH, KO, HI, NE, BN, AR, TL, RU, EL, PT, FR)
+- [x] 23 directory entries across all neighborhoods
+- [x] Single-inference LLM pipeline (7 outputs per post)
+- [x] Cross-language signal detection with entity clustering
+- [x] Voice input (WebSpeech API)
+- [x] Tower (bookmark + topic floors)
+- [x] Processing receipt flash
+- [x] Bleed-in from adjacent neighborhoods
+- [x] Homepage with post/language counts per neighborhood
+- [x] "How it works" explainer on homepage
+- [x] Dual backend (Ollama / Featherless)
+
 ## Task List (Unclaimed -- Grab What Fits You)
 
 ### P0 -- Must ship for demo
 - [ ] Test voice input end-to-end (Chrome + localhost)
 - [ ] Test posting with Ollama or Featherless -- verify translation quality
-- [ ] Add 2-3 more neighborhoods + seed posts (Astoria, Corona, East Harlem) -- edit `src/lib/neighborhoods.ts` + `src/lib/seed.ts`
-- [ ] Practice live demo: speak Chinese -> English appears -> signal card updates
-- [ ] Write/refine pitch script (see pitch section below)
+- [ ] More seed posts with real informal knowledge -- edit `src/lib/seed.ts`
+- [ ] Practice live demo flow
+- [ ] Refine pitch script (see pitch section below)
 
 ### P1 -- Should ship
 - [ ] Tower visual polish -- make floors look more like a literal stacking tower
-- [ ] Add post count / active language count to homepage neighborhood links
 - [ ] Directory entries translate when viewer switches language (currently shows original only)
 - [ ] Neighborhood briefing: one-click AI summary of the week's posts across all languages
-- [ ] More seed posts with real informal knowledge (landlord warnings, cheap services, safety tips)
+- [ ] UI polish -- make the design feel intentional (judges score Design out of 5)
 
 ### P2 -- If time allows
 - [ ] Tavily auto-enrichment: detect question posts, surface real local resources (uses sponsor API -- $15K credits prize)
