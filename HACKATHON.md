@@ -151,11 +151,13 @@ npm run build && npm start
 # Seed database (run once)
 curl -X POST http://localhost:3000/api/seed
 
-# With Featherless (if you have API key)
-FEATHERLESS_API_KEY=your_key npm start
+# With Featherless (create .env.local in project root)
+# Ask Alex for the API key, then:
+echo "FEATHERLESS_API_KEY=your_key_here" > .env.local
+npm run build && npm start
 
-# With Ollama (default, needs Ollama running)
-# Make sure qwen3.5:4b is pulled: ollama pull qwen3.5:4b
+# Without Featherless (needs Ollama running locally)
+# ollama pull qwen3.5:4b
 ```
 
 ---
