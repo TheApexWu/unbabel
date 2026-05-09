@@ -102,15 +102,19 @@ export function SignalCard({ signal, hood, viewerLang, defaultExpanded = false }
   const [enrichResults, setEnrichResults] = useState<EnrichResult[] | null>(null);
   const [enrichLoading, setEnrichLoading] = useState(false);
   const [translations, setTranslations] = useState<Record<number, string>>({});
-  // Fetch translations for contributing posts when expanded
+  // Clear translations when language changes
+  useEffect(() => {
+    setTranslations({});
+  }, [viewerLang]);
+  // Fetch cached translations for contributing posts when expanded
   useEffect(() => {
     if (!expanded || !viewerLang || !signal.posts) return;
     for (const post of signal.posts) {
-      if (post.source_lang !== viewerLang && !translations[post.id]) {
-        fetch(`/api/translate?postId=${post.id}&lang=${viewerLang}`)
+      if (post.source_lang !== viewerLang) {
+        fetch(`/api/translate?postId=${post.id}&lang=${viewerLang}&cacheOnly=1`)
           .then((r) => r.json())
           .then((data) => {
-            if (data.translated_text) {
+            if (data.translated_text && data.cached) {
               setTranslations((prev) => ({ ...prev, [post.id]: data.translated_text }));
             }
           })
