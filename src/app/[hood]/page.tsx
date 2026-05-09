@@ -184,8 +184,8 @@ export default function HoodFeed() {
               {signals.length} active
             </span>
           </div>
-          {signals.map((signal) => (
-            <SignalCard key={signal.entity_value} signal={signal} hood={hood} viewerLang={viewerLang} />
+          {signals.map((signal, i) => (
+            <SignalCard key={signal.entity_value} signal={signal} hood={hood} viewerLang={viewerLang} defaultExpanded={i === 0} />
           ))}
         </div>
       ) : (

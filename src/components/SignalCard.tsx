@@ -97,8 +97,8 @@ function SignalStrength({ langCount }: { langCount: number }) {
   );
 }
 
-export function SignalCard({ signal, hood, viewerLang }: { signal: Signal; hood?: string; viewerLang?: string }) {
-  const [expanded, setExpanded] = useState(false);
+export function SignalCard({ signal, hood, viewerLang, defaultExpanded = false }: { signal: Signal; hood?: string; viewerLang?: string; defaultExpanded?: boolean }) {
+  const [expanded, setExpanded] = useState(defaultExpanded);
   const [enrichResults, setEnrichResults] = useState<EnrichResult[] | null>(null);
   const [enrichLoading, setEnrichLoading] = useState(false);
   const [translations, setTranslations] = useState<Record<number, string>>({});

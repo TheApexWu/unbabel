@@ -1,0 +1,23 @@
+UNBABEL LIVE DEMO SCRIPT
+========================
+
+NEIGHBORHOOD: Jackson Heights
+TENURE: settled
+
+TEXT TO PASTE:
+37号大道的那个房产中介千万别去。签完合同之后加了好多隐藏费用，我朋友也被骗了。
+
+WHAT HAPPENS:
+- Language detected: Chinese (zh)
+- Entities extracted: "37th ave", "hidden fees", "rental scam"
+- Signal card "37th ave / hidden fees" updates: 4 languages → 5
+  Before: English, Bengali, Tagalog, Nepali
+  After:  English, Bengali, Tagalog, Nepali, Chinese
+
+TRANSLATION (for audience):
+"Don't go to that realty office on 37th Ave. They added lots of hidden fees after signing the contract, my friend was scammed too."
+
+TALKING POINT:
+A Chinese newcomer's warning about the same predatory realty office
+that English, Bengali, Tagalog, and Nepali speakers already flagged.
+Five languages, one signal -- nobody had to translate anything manually.
