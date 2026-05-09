@@ -4,178 +4,161 @@ Track 2: Learning to be American
 "Reddit aggregates opinions. We aggregate evidence."
 
 PRE-DEMO: Browser on localhost:3000/jackson-heights
-          Top signal auto-expanded. Chinese text ready to paste.
+          Top signal auto-expanded.
+          Chinese text ready to paste (bottom of this file).
           Phone field: any string works (e.g. "demo123")
 
 =====================================
 
-[0:00 - 0:20] HOOK
+[0:00 - 0:15] COLD OPEN (screen share already up)
 
-"My mom immigrated to the US and found jobs, English
-classes, and legal help through churches -- not just
-Chinese ones. But she had to walk through the door and
-speak the right language.
+"8 reports. 6 languages. Spanish, Tagalog, Chinese,
+Russian, Korean, Bengali. All searching for free
+English classes. None of them can read each other's
+posts. None of them know each other exists.
 
-What if the door was already open? What if the entire
-neighborhood was already talking -- you just couldn't
-hear it because of language?"
+UnBabel connected them."
 
-[0:20 - 0:55] THE SIGNAL (point at screen)
+[0:15 - 0:50] THE SCAM (scroll to 37th Ave signal)
 
-"This is Jackson Heights. Look at this signal.
-'Free ESL' -- 8 reports, 6 languages. Spanish, Tagalog,
-Chinese, Russian, Korean, Bengali.
+"Now look at this. 37th Ave, hidden fees. Four
+languages. English, Bengali, Tagalog, Nepali."
 
-Six communities that cannot read each other. All
-independently searching for the same thing. This
-pattern was invisible until they all reported on
-the same board.
+(Click expand)
 
-This isn't a forum. This is cross-language
-intelligence. No one voted. No one moderated.
-The system detected the pattern."
+"Four independent warnings about the same realty
+office. This is a Bengali post. This is Tagalog.
+Nepali. English. Four strangers. Four scripts.
+Same warning. None coordinated.
 
-[0:55 - 1:30] THE SCAM (click 37th Ave signal)
-
-"Now look at this one. '37th Ave -- hidden fees.'
-Four languages. English, Bengali, Tagalog, Nepali.
-Four independent warnings about the same realty
-office. None of these people know each other.
-
-(Click expand -- show the raw posts in 4 scripts)
-
-That's a Bengali post. That's Tagalog. That's
-Nepali. That's English. Four strangers. Four
-languages. Same warning.
+The landlord relied on language barriers to keep
+complaints isolated. UnBabel ended that."
 
 (Point at complaint button)
 
-One click. Pre-filled complaint to NYC 311.
-That's not awareness. That's collective action
-from people who never coordinated."
+"One click. Pre-filled complaint to NYC 311.
+That's not awareness. That's collective action."
 
-[1:30 - 2:10] LIVE DEMO
+[0:50 - 1:40] LIVE DEMO
 
 "Let me show you this working live."
 
-(Scroll to report form, type phone, paste Chinese text)
+(Scroll to report form. Type phone. Paste Chinese.)
 
 37号大道的那个房产中介千万别去。签完合同之后加了好多隐藏费用，我朋友也被骗了。
 
-"I just posted in Chinese. Watch what happens."
+"I just posted in Chinese about that same
+realty office. Watch what happens."
 
-(Point at processing receipt -- green flash)
+(Point at processing receipt)
 
-"One inference call. Seven tasks. Language detection,
-meaning-based translation, PII stripping, moderation,
-entity extraction, topic classification, cultural
-context. Not seven API calls. One structured output."
+"One inference call. Seven tasks simultaneously.
+Language detection. Translation. PII stripping.
+Moderation. Entity extraction. Topic classification.
+Cultural context. One structured output."
 
-(Refresh page. Signal updates.)
+(Refresh. Signal updates to 5 languages.)
 
-"Chinese just joined the signal. Five languages now.
-The pattern got stronger. Every new language that
-joins makes every signal more credible."
+"Chinese just joined the signal. Five languages
+now. The pattern got stronger. Every new language
+makes every signal more credible."
 
-[2:10 - 2:35] THE MOAT + TRUST
+[1:40 - 2:10] THE MOAT
 
-"Someone asked me earlier -- isn't this Reddit?
+"Someone asked me -- isn't this Reddit?
 
 Reddit aggregates opinions. We aggregate evidence.
 There's no feed to scroll. No upvote. No algorithm.
-You report something, the system cross-references it
-against every language in the neighborhood. A pattern
-exists or it doesn't.
+You report something, the system cross-references
+it against every language in the neighborhood.
 
 This is closer to epidemiology than social media.
 
-And you can't fake it. One phone, one identity. You'd
-need multiple SIM cards and fluency in multiple
-languages to game a signal. The cost of attacking
-this system exceeds any single-language platform."
+And you can't fake it. One phone, one identity.
+You'd need multiple SIM cards and fluency in
+multiple languages to game a signal."
 
-[2:35 - 2:50] SCALE (flash homepage)
+[2:10 - 2:30] SCALE (flash homepage)
 
-(Navigate to localhost:3000 -- show map)
+(Navigate to localhost:3000)
 
 "12 neighborhoods. 13 languages. 68 reports.
-And the network effect is built in -- every new
-language makes every existing signal stronger.
-This doesn't get noisier as it grows. It gets
-more accurate."
+Every new language makes every signal stronger.
+This doesn't get noisier. It gets more accurate."
 
-[2:50 - 3:00] CLOSE
+[2:30 - 2:45] TRUST + MONETIZATION (if time)
+
+"City agencies subscribe to the signal feed.
+Tenant advocacy orgs get real-time alerts.
+We never charge immigrants."
+
+[2:45 - 3:00] CLOSE
 
 "Every other project here builds tools for
 immigrants to interact with systems.
 
 We built a tool for immigrants to interact
-with each other.
-
-The neighborhood is talking. Now everyone
-on the block hears the same thing."
+with each other."
 
 =====================================
 
-Q&A ANSWERS (keep these short)
-
-"Why not WhatsApp/WeChat?"
--> Those are walled by language. Bengali group and
-   Mexican group never cross. We merge the signals.
-
-"How do you get users?"
--> One church, one legal clinic. They already have
-   multilingual foot traffic and paper bulletin boards.
-   We digitize what's already happening.
-
-"What about fake reports?"
--> You can't fake cross-language corroboration.
-   One phone = one alias. You'd need multiple SIMs
-   AND fluency in multiple languages.
+Q&A (keep short, don't ramble)
 
 "Isn't this Reddit?"
 -> Reddit aggregates opinions. We aggregate evidence.
-   This is epidemiology, not social media.
+   Epidemiology, not social media.
+
+"Why not WhatsApp?"
+-> Walled by language. Bengali and Mexican groups
+   never cross. We merge the signals.
+
+"How do you get users?"
+-> One church, one legal clinic. They already have
+   multilingual foot traffic. We digitize paper
+   bulletin boards.
+
+"Fake reports?"
+-> Can't fake cross-language corroboration.
+   One phone = one alias. Need multiple SIMs
+   AND multiple languages to game it.
 
 "Who pays?"
--> City agencies subscribe to the signal feed.
-   Tenant advocacy orgs get real-time alerts.
-   We never charge immigrants.
+-> City agencies, tenant orgs, advocacy groups.
+   Never charge immigrants.
 
-"What about liability?"
--> Section 230. Signals say "N reports mention X."
-   That's a fact about reports, not a claim about
-   the entity. PII stripped. Posts expire in 7 days.
+"Liability?"
+-> Section 230. Signals state facts about reports,
+   not claims about entities. PII stripped. 7-day expiry.
 
-"AI-generated attacks / fake accounts?"
--> One phone = one deterministic alias. Physical SIM
-   required. The AI independently extracts entities --
-   you can't control what it matches. Cost of attack
-   exceeds any single-language platform.
-
-"What's the technical moat?"
+"Technical moat?"
 -> Single-inference multi-task pipeline. Cross-lingual
    entity resolution. The AI is infrastructure, not
-   the product. Users never see a chatbot. They see
-   patterns that emerged from aggregate data.
-
-"Monetization?"
--> Three paths. City agencies subscribe to signal feed.
-   Advocacy orgs pay for real-time alerts. Entity
-   reputation ledger (neighborhood Glassdoor).
-   Never charge immigrants.
+   the product. Epidemiological pattern detection
+   across language boundaries.
 
 "Learning to be American?"
 -> Being American isn't learning English. It's learning
    that your voice combines with strangers' voices to
-   create power. First amendment in every language.
+   create power.
 
 =====================================
 
-CHINESE DEMO TEXT (copy this):
+CHINESE DEMO TEXT (copy this exactly):
 
 37号大道的那个房产中介千万别去。签完合同之后加了好多隐藏费用，我朋友也被骗了。
 
-(Tell audience: "Don't go to that realty office on
-37th Ave. They added hidden fees after signing.
-My friend got scammed too.")
+(For audience: "Don't go to that realty office on
+37th Ave. Hidden fees after signing. My friend
+got scammed too.")
+
+=====================================
+
+1-MIN VIDEO NARRATION (screen record JH page):
+
+"8 reports. 6 languages. None can read each other.
+UnBabel detected the pattern. This signal: 4
+languages warning about the same landlord's hidden
+fees. One click files a complaint with NYC 311.
+Reddit aggregates opinions. We aggregate evidence.
+12 neighborhoods. 13 languages. The neighborhood
+is talking. Now everyone hears."

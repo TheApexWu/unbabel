@@ -176,6 +176,9 @@ export default function HoodFeed() {
         <p className="text-gray-400 text-sm animate-pulse font-mono">listening across languages...</p>
       ) : signals.length > 0 ? (
         <div className="space-y-4 mb-8">
+          <p className="text-sm text-gray-600 font-mono mb-3">
+            these people cannot read each other. the system connected them.
+          </p>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xs text-gray-500 font-mono uppercase tracking-wide">
               cross-language patterns detected
