@@ -9,6 +9,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const postId = Number(searchParams.get("postId"));
   const targetLang = searchParams.get("lang") ?? "en";
+  const cacheOnly = searchParams.get("cacheOnly") === "1";
 
   if (!postId) {
     return Response.json({ error: "postId required" }, { status: 400 });
@@ -21,6 +22,11 @@ export async function GET(request: Request) {
       translated_text: cached.translated_text,
       cached: true,
     });
+  }
+
+  // If cache-only mode, return immediately without LLM call
+  if (cacheOnly) {
+    return Response.json({ translated_text: null, cached: false });
   }
 
   // Fetch original post

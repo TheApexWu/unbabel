@@ -58,6 +58,7 @@ export function PostCard({
 }) {
   const [displayText, setDisplayText] = useState(post.body_original);
   const [loading, setLoading] = useState(false);
+  const [needsTranslate, setNeedsTranslate] = useState(false);
   const [saved, setSaved] = useState(false);
   const [showTopicPicker, setShowTopicPicker] = useState(false);
   const isBleed = post.hood !== currentHood;
@@ -65,10 +66,31 @@ export function PostCard({
   useEffect(() => {
     if (post.source_lang === viewerLang) {
       setDisplayText(post.body_original);
+      setNeedsTranslate(false);
       return;
     }
 
+    // Try cache-only first (fast path)
+    fetch(`/api/translate?postId=${post.id}&lang=${viewerLang}&cacheOnly=1`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.translated_text && data.cached) {
+          setDisplayText(data.translated_text);
+          setNeedsTranslate(false);
+        } else {
+          setDisplayText(post.body_original);
+          setNeedsTranslate(true);
+        }
+      })
+      .catch(() => {
+        setDisplayText(post.body_original);
+        setNeedsTranslate(true);
+      });
+  }, [post.id, post.source_lang, post.body_original, viewerLang]);
+
+  function handleTranslate() {
     setLoading(true);
+    setNeedsTranslate(false);
     fetch(`/api/translate?postId=${post.id}&lang=${viewerLang}`)
       .then((r) => r.json())
       .then((data) => {
@@ -76,7 +98,7 @@ export function PostCard({
       })
       .catch(() => setDisplayText(post.body_original))
       .finally(() => setLoading(false));
-  }, [post.id, post.source_lang, post.body_original, viewerLang]);
+  }
 
   async function handleBookmark(topic: string) {
     if (!viewerAlias) return;
@@ -148,6 +170,14 @@ export function PostCard({
       <p className={loading ? "text-gray-400 animate-pulse" : "text-gray-900"}>
         {displayText}
       </p>
+      {needsTranslate && !loading && (
+        <button
+          onClick={handleTranslate}
+          className="text-xs text-purple-600 hover:text-purple-800 mt-1 font-mono"
+        >
+          translate
+        </button>
+      )}
     </div>
   );
 }
