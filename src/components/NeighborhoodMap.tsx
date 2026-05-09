@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import maplibregl from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 const COORDS: Record<string, [number, number]> = {
   "jackson-heights": [40.7557, -73.8831],
@@ -25,8 +25,7 @@ interface Stats {
 
 export default function NeighborhoodMap() {
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstance = useRef<maplibregl.Map | null>(null);
-  const markersRef = useRef<maplibregl.Marker[]>([]);
+  const mapInstance = useRef<L.Map | null>(null);
   const [stats, setStats] = useState<Stats>({});
 
   useEffect(() => {
@@ -39,15 +38,15 @@ export default function NeighborhoodMap() {
   useEffect(() => {
     if (!mapRef.current || mapInstance.current) return;
 
-    const map = new maplibregl.Map({
-      container: mapRef.current,
-      style: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-      center: [-73.9, 40.73],
-      zoom: 10.5,
-      scrollZoom: false,
+    const map = L.map(mapRef.current, {
+      center: [40.73, -73.9],
+      zoom: 11,
+      scrollWheelZoom: false,
     });
 
-    map.addControl(new maplibregl.NavigationControl(), "top-right");
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "&copy; OpenStreetMap contributors",
+    }).addTo(map);
 
     mapInstance.current = map;
 
@@ -62,10 +61,7 @@ export default function NeighborhoodMap() {
     const map = mapInstance.current;
     if (!map) return;
 
-    // Clear old markers
-    markersRef.current.forEach((m) => m.remove());
-    markersRef.current = [];
-
+    // Import neighborhoods inline to avoid circular deps
     const { NEIGHBORHOODS } = require("@/lib/neighborhoods");
 
     for (const hood of NEIGHBORHOODS) {
@@ -76,38 +72,23 @@ export default function NeighborhoodMap() {
       const postCount = s?.posts ?? 0;
       const langCount = s?.languages ?? 0;
 
-      const size = Math.max(16, Math.min(50, 16 + postCount * 4));
+      const radius = Math.max(8, Math.min(25, 8 + postCount * 2));
 
-      // Create a purple circle DOM element for the marker
-      const el = document.createElement("div");
-      el.style.width = `${size}px`;
-      el.style.height = `${size}px`;
-      el.style.borderRadius = "50%";
-      el.style.backgroundColor = "rgba(168, 85, 247, 0.6)";
-      el.style.border = "2px solid #7e22ce";
-      el.style.cursor = "pointer";
-      el.style.transition = "transform 0.15s ease";
-      el.addEventListener("mouseenter", () => {
-        el.style.transform = "scale(1.2)";
-      });
-      el.addEventListener("mouseleave", () => {
-        el.style.transform = "scale(1)";
-      });
+      const circle = L.circleMarker(coord, {
+        radius,
+        color: "#7e22ce",
+        fillColor: "#a855f7",
+        fillOpacity: 0.6,
+        weight: 2,
+      }).addTo(map);
 
-      const popup = new maplibregl.Popup({ offset: 15 }).setHTML(
+      circle.bindPopup(
         `<div style="text-align:center;font-family:Georgia,serif;">
           <strong style="font-size:14px;color:#7e22ce;">${hood.name}</strong><br/>
-          <span style="font-size:12px;color:#999;">${postCount} posts &middot; ${langCount} languages</span><br/>
-          <a href="/${hood.slug}" style="font-size:12px;color:#a855f7;">enter neighborhood &rarr;</a>
+          <span style="font-size:12px;color:#666;">${postCount} posts &middot; ${langCount} languages</span><br/>
+          <a href="/${hood.slug}" style="font-size:12px;color:#7e22ce;">enter neighborhood &rarr;</a>
         </div>`
       );
-
-      const marker = new maplibregl.Marker({ element: el })
-        .setLngLat([coord[1], coord[0]])
-        .setPopup(popup)
-        .addTo(map);
-
-      markersRef.current.push(marker);
     }
   }, [stats]);
 
@@ -115,7 +96,7 @@ export default function NeighborhoodMap() {
     <div
       ref={mapRef}
       style={{ height: 400, width: "100%", borderRadius: 4 }}
-      className="border border-gray-700"
+      className="border border-gray-300"
     />
   );
 }
