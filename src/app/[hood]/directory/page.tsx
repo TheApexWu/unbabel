@@ -6,6 +6,7 @@ import Link from "next/link";
 import { NEIGHBORHOODS, SUPPORTED_LANGUAGES } from "@/lib/neighborhoods";
 import { DirectoryCard } from "@/components/DirectoryCard";
 import { LanguagePicker } from "@/components/LanguagePicker";
+import { t } from "@/lib/ui-strings";
 
 function detectLang(): string {
   if (typeof navigator === "undefined") return "en";
@@ -68,7 +69,7 @@ export default function DirectoryPage() {
       <div className="flex items-center justify-between mb-4 border-b border-gray-300 pb-3">
         <div>
           <Link href="/" className="text-xs text-gray-400 hover:text-purple-800">
-            &larr; all neighborhoods
+            &larr; {t(viewerLang, "allNeighborhoods")}
           </Link>
           <h1 className="text-2xl font-bold text-purple-800" style={{ fontFamily: "Georgia, serif" }}>
             {neighborhood.name}
@@ -76,7 +77,7 @@ export default function DirectoryPage() {
           <span className="text-xs text-gray-400">{neighborhood.borough}</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-400">reading in:</span>
+          <span className="text-xs text-gray-400">{t(viewerLang, "readingIn")}</span>
           <LanguagePicker current={viewerLang} onChange={setViewerLang} />
         </div>
       </div>
@@ -84,10 +85,10 @@ export default function DirectoryPage() {
       {/* Nav */}
       <div className="flex gap-4 mb-4 text-sm border-b border-gray-200 pb-2">
         <Link href={`/${hood}`} className="text-gray-500 hover:text-purple-800">
-          the feed
+          {t(viewerLang, "signals")}
         </Link>
         <span className="text-purple-800 font-bold border-b-2 border-purple-800 pb-1">
-          directory
+          {t(viewerLang, "directory")}
         </span>
       </div>
 
@@ -103,7 +104,7 @@ export default function DirectoryPage() {
                 : "bg-white text-gray-600 border-gray-300 hover:border-purple-400"
             }`}
           >
-            {cat}
+            {t(viewerLang, cat)}
           </button>
         ))}
       </div>
@@ -111,9 +112,9 @@ export default function DirectoryPage() {
       {/* Entries */}
       <div className="space-y-3">
         {loading ? (
-          <p className="text-gray-400 text-sm animate-pulse">loading...</p>
+          <p className="text-gray-400 text-sm animate-pulse">{t(viewerLang, "loading")}</p>
         ) : entries.length === 0 ? (
-          <p className="text-gray-400 text-sm">no listings yet.</p>
+          <p className="text-gray-400 text-sm">{t(viewerLang, "noListings")}</p>
         ) : (
           entries.map((entry) => (
             <DirectoryCard
