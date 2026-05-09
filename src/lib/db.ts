@@ -198,6 +198,18 @@ export function getSignalClusters(
   return stmt.all(...allHoods) as SignalCluster[];
 }
 
+export function getPostsByIds(ids: number[]) {
+  if (ids.length === 0) return [];
+  const placeholders = ids.map(() => "?").join(",");
+  const stmt = db.prepare(`
+    SELECT id, alias, body_original, source_lang, hood, tenure, created_at
+    FROM posts
+    WHERE id IN (${placeholders})
+    ORDER BY created_at DESC
+  `);
+  return stmt.all(...ids);
+}
+
 // --- Directory queries ---
 
 export function getDirectoryByHood(hood: string, category?: string) {
