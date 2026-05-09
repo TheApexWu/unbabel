@@ -88,12 +88,14 @@ CREATE INDEX IF NOT EXISTS idx_bookmarks_alias ON bookmarks(alias);
 export const db = getDatabase();
 
 // Auto-seed if DB is empty (after db export to avoid circular dep with seed.ts)
-{
+try {
   const count = db.prepare("SELECT COUNT(*) as c FROM posts").get() as { c: number };
   if (count.c === 0) {
     const { seedDatabase } = require("./seed");
     seedDatabase();
   }
+} catch {
+  // Ignore seed errors during build (SQLITE_BUSY from parallel workers)
 }
 
 // --- Post queries ---
