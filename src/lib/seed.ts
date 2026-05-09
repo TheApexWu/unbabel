@@ -175,6 +175,96 @@ export function seedDatabase() {
       hood: "bushwick",
       tenure: "settled",
     },
+
+    // === Astoria ===
+    {
+      alias: "quick-reef",
+      body: "To souvlaki sto Ditmars einai to kalytero. O kyrios pou to kanei einai apo Thessaloniki. Pame olo to Savvato.",
+      lang: "el",
+      hood: "astoria",
+      tenure: "born",
+    },
+    {
+      alias: "true-coast",
+      body: "المقهى المصري الجديد على شارع Steinway فيه شيشة وأكل بيتي. الأسعار معقولة والأجواء حلوة.",
+      lang: "ar",
+      hood: "astoria",
+      tenure: "rooted",
+    },
+    {
+      alias: "calm-anchor",
+      body: "O salao brasileiro na 30th Ave faz sobrancelha por $10 e a dona ajuda com traducao de documentos se voce pedir.",
+      lang: "pt",
+      hood: "astoria",
+      tenure: "settled",
+    },
+    {
+      alias: "clear-bay",
+      body: "Anyone know a good immigration lawyer around here? Need to renew my work permit and the one on Broadway quoted me $3000 which seems insane.",
+      lang: "en",
+      hood: "astoria",
+      tenure: "new",
+    },
+
+    // === Corona ===
+    {
+      alias: "deep-sun",
+      body: "La senora que vende tamales en la Roosevelt y la 104 esta ahi todos los domingos temprano. Los de rajas son los mejores.",
+      lang: "es",
+      hood: "corona",
+      tenure: "born",
+    },
+    {
+      alias: "warm-stone",
+      body: "有人知道Corona附近哪里可以学英语吗？免费的最好。我刚来两个月，什么都不懂。",
+      lang: "zh",
+      hood: "corona",
+      tenure: "new",
+    },
+    {
+      alias: "soft-rain",
+      body: "Cuidado con el taller mecanico en la Junction. Me cobraron $500 por algo que otro lugar hizo por $150. No vayan ahi.",
+      lang: "es",
+      hood: "corona",
+      tenure: "settled",
+    },
+    {
+      alias: "keen-hill",
+      body: "The library on 104th has free tax prep every Saturday until April. They speak Spanish and Mandarin. No appointment needed.",
+      lang: "en",
+      hood: "corona",
+      tenure: "rooted",
+    },
+
+    // === East Harlem ===
+    {
+      alias: "bold-wave",
+      body: "La alcapurria de la senora en la 116 y Lexington es la mejor del barrio. Llega antes del mediodia porque se acaban.",
+      lang: "es",
+      hood: "east-harlem",
+      tenure: "born",
+    },
+    {
+      alias: "steady-peak",
+      body: "Rent stabilized apartment on 118th just went up $200 and they're saying it's legal. Is that right? Who do I call?",
+      lang: "en",
+      hood: "east-harlem",
+      tenure: "settled",
+    },
+    {
+      alias: "free-cloud",
+      body: "La clinica en la 117 y la 3ra atiende sin seguro medico. Hablan espanol y no piden papeles. Mi familia va ahi desde hace anos.",
+      lang: "es",
+      hood: "east-harlem",
+      tenure: "rooted",
+    },
+    {
+      alias: "wide-spark",
+      body: "Cherche quelqu'un qui parle francais dans le quartier. Je viens d'arriver du Senegal et je ne connais personne ici.",
+      lang: "fr",
+      hood: "east-harlem",
+      tenure: "new",
+    },
   ];
 
   // Entity map keyed by post index (0-based), pre-computed for demo
@@ -201,6 +291,21 @@ export function seedDatabase() {
     19: [{ type: "street", value: "myrtle ave" }, { type: "business", value: "bodega" }],
     20: [{ type: "street", value: "willoughby ave" }, { type: "org", value: "community fridge" }],
     21: [{ type: "issue", value: "language exchange" }, { type: "issue", value: "free esl" }],
+    // Astoria
+    22: [{ type: "street", value: "ditmars" }, { type: "business", value: "souvlaki shop" }],
+    23: [{ type: "street", value: "steinway" }, { type: "business", value: "egyptian cafe" }],
+    24: [{ type: "street", value: "30th ave" }, { type: "issue", value: "document help" }],
+    25: [{ type: "issue", value: "immigration lawyer" }, { type: "issue", value: "work permit" }],
+    // Corona
+    26: [{ type: "street", value: "roosevelt and 104th" }, { type: "business", value: "tamale vendor" }],
+    27: [{ type: "issue", value: "free esl" }, { type: "issue", value: "new arrival" }],
+    28: [{ type: "business", value: "mechanic on junction" }, { type: "issue", value: "overcharging" }],
+    29: [{ type: "org", value: "library on 104th" }, { type: "issue", value: "free tax prep" }],
+    // East Harlem
+    30: [{ type: "street", value: "116th and lexington" }, { type: "business", value: "alcapurria vendor" }],
+    31: [{ type: "issue", value: "rent increase" }, { type: "issue", value: "rent stabilized" }],
+    32: [{ type: "street", value: "117th and 3rd" }, { type: "org", value: "clinic" }, { type: "issue", value: "healthcare no insurance" }],
+    33: [{ type: "issue", value: "new arrival" }, { type: "issue", value: "french speakers" }],
   };
 
   for (let i = 0; i < posts.length; i++) {
@@ -382,6 +487,82 @@ export function seedDatabase() {
       category: "food",
       hood: "bushwick",
       address: "Myrtle Ave",
+      source: "seed",
+    },
+
+    // Astoria
+    {
+      name: "Taverna Kyclades",
+      description_original:
+        "To kalytero psari stin Astoria. Ftini timi, megales merides. Ela noris to Savvatokiriako.",
+      source_lang: "el",
+      category: "food",
+      hood: "astoria",
+      address: "Ditmars Blvd",
+      source: "seed",
+    },
+    {
+      name: "Steinway Hookah & Cafe",
+      description_original:
+        "شيشة وقهوة عربية. مكان مريح للجالية العربية. مفتوح لغاية 2 الليل.",
+      source_lang: "ar",
+      category: "nightlife",
+      hood: "astoria",
+      address: "Steinway St",
+      source: "seed",
+    },
+    {
+      name: "Astoria Immigration Legal Services",
+      description_original:
+        "Free consultations for work permits, green cards, asylum. Greek, Arabic, Spanish, English. Walk-ins Thursday.",
+      source_lang: "en",
+      category: "services",
+      hood: "astoria",
+      address: "Broadway",
+      source: "seed",
+    },
+
+    // Corona
+    {
+      name: "Corona Public Library",
+      description_original:
+        "Clases de ingles gratis. Preparacion de impuestos los sabados. Computadoras disponibles. No necesitas tarjeta de biblioteca.",
+      source_lang: "es",
+      category: "community",
+      hood: "corona",
+      address: "104th Street",
+      source: "seed",
+    },
+    {
+      name: "Taqueria La Esquina",
+      description_original:
+        "Tacos al pastor, tamales, y aguas frescas. La senora tambien vende champurrado en invierno.",
+      source_lang: "es",
+      category: "food",
+      hood: "corona",
+      address: "Roosevelt Ave",
+      source: "seed",
+    },
+
+    // East Harlem
+    {
+      name: "Boriken Health Center",
+      description_original:
+        "Atencion medica sin seguro. Hablan espanol. No piden documentos de inmigracion. Aceptan pago en escala.",
+      source_lang: "es",
+      category: "health",
+      hood: "east-harlem",
+      address: "117th Street",
+      source: "seed",
+    },
+    {
+      name: "East Harlem Tenant Advocacy",
+      description_original:
+        "Free help with rent stabilization questions, eviction defense, landlord complaints. English and Spanish.",
+      source_lang: "en",
+      category: "services",
+      hood: "east-harlem",
+      address: "116th Street",
       source: "seed",
     },
   ];

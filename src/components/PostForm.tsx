@@ -15,6 +15,7 @@ const LANG_NAMES: Record<string, string> = {
   en: "English", es: "Spanish", zh: "Chinese", ko: "Korean",
   hi: "Hindi", ne: "Nepali", bn: "Bengali", ar: "Arabic",
   tl: "Tagalog", ru: "Russian",
+  el: "Greek", pt: "Portuguese", fr: "French",
 };
 
 // WebSpeech language codes (Chrome needs full locale)
@@ -29,6 +30,9 @@ const SPEECH_LANGS: { code: string; label: string; speech: string }[] = [
   { code: "ar", label: "ع", speech: "ar-SA" },
   { code: "tl", label: "TL", speech: "tl-PH" },
   { code: "ru", label: "RU", speech: "ru-RU" },
+  { code: "el", label: "EL", speech: "el-GR" },
+  { code: "pt", label: "PT", speech: "pt-BR" },
+  { code: "fr", label: "FR", speech: "fr-FR" },
 ];
 
 export function PostForm({

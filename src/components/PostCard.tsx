@@ -24,6 +24,9 @@ const LANG_NAMES: Record<string, string> = {
   ar: "Arabic",
   tl: "Tagalog",
   ru: "Russian",
+  el: "Greek",
+  pt: "Portuguese",
+  fr: "French",
 };
 
 const TOPIC_OPTIONS = [
