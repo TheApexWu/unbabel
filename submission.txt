@@ -1,0 +1,61 @@
+UNBABEL -- HACKATHON SUBMISSION ANSWERS
+=======================================
+
+ELEVATOR PITCH (200 char max):
+Cross-language intelligence for immigrant neighborhoods. When 6 languages independently report the same landlord, that's not an accusation -- that's a pattern. We aggregate evidence, not opinions.
+
+=======================================
+
+ABOUT THE PROJECT (markdown):
+
+## Inspiration
+
+My mom immigrated to the US and found jobs, English classes, and legal help through churches -- not just Chinese ones. But she had to walk through the door and speak the right language. NYC has 800 languages. WhatsApp and WeChat connect people vertically (Chinese to Chinese, Dominican to Dominican). Nothing connects them horizontally -- across language barriers, on the same block.
+
+## What it does
+
+UnBabel is a cross-language intelligence system for immigrant neighborhoods. Residents report tips, warnings, and questions in any language. The system translates everything, extracts entities (landlords, businesses, streets, issues), and detects when multiple languages independently mention the same thing. When 4 languages warn about the same realty office's hidden fees -- and none of those reporters can read each other -- that's not an accusation. That's a pattern. One click files a formal complaint with NYC 311.
+
+## How we built it
+
+- **Single-inference LLM pipeline**: One API call per post does 7 NLP tasks simultaneously -- language detection, meaning-based translation, PII stripping, immigrant-aware moderation, entity extraction, topic classification, and cultural context generation. Not 7 API calls. One structured output.
+- **Cross-language entity clustering**: Entities are extracted in normalized English regardless of source language. SQL aggregation detects co-occurrence across language boundaries. This is cross-lingual information extraction, not translation.
+- **Pre-cached translations**: EN, ES, ZH translations pre-computed for instant language switching. Full UI i18n -- every label, button, and header translates.
+- **Privacy-first**: Phone numbers hashed client-side into deterministic aliases. Never stored. PII stripped from post text. Posts expire in 7 days.
+- **Signals-first UX**: Neighborhood pages open to cross-language signal clusters, not a feed. Signal strength indicators (2 languages = pattern, 5+ = strong corroboration). Cross-neighborhood tracking catches serial predators across geographic boundaries.
+
+## Challenges we ran into
+
+- **Identity crisis**: We went back and forth between "forum," "social media," "whistleblowing tool." Settled on "cross-language intelligence" after someone asked "isn't this Reddit?" The answer: Reddit aggregates opinions. We aggregate evidence.
+- **Cold start problem**: An empty board is a dead board. Solved with 68 realistic seed posts across 13 languages with pre-computed entity maps so signals appear immediately.
+- **Translation latency**: LLM translation is 2-5 seconds per post. Pre-caching seed translations in SQLite made language switching instant for demo content. Uncached posts show a "translate" button instead of hanging.
+- **Privacy vs. utility**: Small-language communities (e.g., one Bengali speaker in a building) can be identified by elimination. Solved with privacy-safe language badges -- languages with only 1 post in a signal are hidden.
+
+## Accomplishments we're proud of
+
+- 10 active cross-language signals in Jackson Heights alone. "Free ESL" detected across 6 languages, 8 independent reports.
+- One-click complaint filing: signals with 3+ languages generate pre-filled NYC 311, DOL, and DCA complaint links.
+- The trust model: "We don't moderate. We don't vote. Three strangers who can't read each other named the same landlord independently. That's not an accusation -- that's a pattern."
+
+## What we learned
+
+- The product is the pattern detection, not the forum. Leading with signals instead of posts changed every conversation.
+- "Reddit aggregates opinions. We aggregate evidence" is the line that killed the social media comparison.
+- Cross-language corroboration is a genuinely novel trust mechanism. You can't fake it without multiple phones AND fluency in multiple languages.
+
+## What's next
+
+- Partner with one church, one legal clinic in Jackson Heights for real-world pilot
+- City agencies subscribing to the signal feed (311 already wants this data)
+- Entity reputation ledger: persistent records that outlive the 7-day post expiry
+- Expand beyond NYC: the architecture is city-agnostic
+
+=======================================
+
+BUILT WITH:
+Next.js, TypeScript, SQLite, Tailwind CSS, Featherless.ai, Tavily, Qwen2.5-72B, WebSpeech API, Leaflet, Node.js
+
+=======================================
+
+TRY IT OUT LINKS:
+https://github.com/TheApexWu/unbabel
