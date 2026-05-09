@@ -136,18 +136,26 @@ export default function TowerPage() {
       {/* Tower header */}
       <div className="mb-6 border-b border-gray-300 pb-3">
         <div className="flex flex-wrap items-center justify-between">
-          <h1
-            className="text-2xl font-bold text-purple-800"
-            style={{ fontFamily: "Georgia, serif" }}
-          >
-            tower of {alias}
-          </h1>
+          <div>
+            <h1
+              className="text-4xl font-bold text-purple-800 tracking-wide"
+              style={{ fontFamily: "Georgia, serif" }}
+            >
+              TOWER
+            </h1>
+            <p className="text-sm text-purple-600 -mt-1" style={{ fontFamily: "Georgia, serif" }}>
+              {alias}
+            </p>
+            <p className="text-xs text-gray-400 italic mt-0.5">
+              knowledge that survives
+            </p>
+          </div>
           <div className="flex items-center gap-2">
             <span className="text-xs text-gray-400">reading in:</span>
             <LanguagePicker current={viewerLang} onChange={setViewerLang} />
           </div>
         </div>
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs text-gray-500 mt-2">
           {totalPosts} saved across {floorKeys.length} floor{floorKeys.length !== 1 ? "s" : ""}.
           these don&apos;t expire.
         </p>
@@ -169,71 +177,91 @@ export default function TowerPage() {
         </div>
       ) : (
         <div className="space-y-0">
-          {/* Tower visualization -- floors stack bottom up */}
+          {/* Tower visualization -- floors stack bottom up (reversed so top floor renders first) */}
           {[...floorKeys].reverse().map((topic, floorIndex) => {
             const floorNum = floorKeys.length - floorIndex;
             const color = FLOOR_COLORS[topic] ?? FLOOR_COLORS.general;
 
+            // Pyramid widths: FL1 (bottom) = 100%, FL2 = 92%, FL3 = 84%, FL4 = 76%, FL5 = 68%, FL6+ = 60%
+            // floorNum = 1 is bottom (widest), higher = narrower (top)
+            const widthPercent = Math.max(60, 100 - (floorNum - 1) * 8);
+            // Border-left thickness: thicker at bottom, thinner at top
+            const borderLeftWidth = Math.max(2, 8 - (floorNum - 1));
+            // Shadow intensity: stronger at bottom
+            const shadowOpacity = Math.max(0.04, 0.15 - (floorNum - 1) * 0.02);
+
             return (
               <div
                 key={topic}
-                className={`border border-gray-300 border-l-4 ${color}`}
+                className="mx-auto"
+                style={{ maxWidth: `${widthPercent}%` }}
               >
-                {/* Floor header */}
-                <div className="px-3 py-2 border-b border-gray-200 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-gray-500 font-mono">
-                      FL{floorNum}
-                    </span>
-                    <span className="text-xs font-bold text-gray-700 tracking-widest">
-                      {FLOOR_LABELS[topic] ?? topic.toUpperCase()}
+                <div
+                  className={`border border-gray-300 ${color}`}
+                  style={{
+                    borderLeftWidth: `${borderLeftWidth}px`,
+                    boxShadow: `0 2px 8px rgba(0,0,0,${shadowOpacity}), inset 0 1px 0 rgba(255,255,255,0.6)`,
+                  }}
+                >
+                  {/* Floor header */}
+                  <div className="px-3 py-2 border-b border-gray-200 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-gray-500 font-mono">
+                        FL{floorNum}
+                      </span>
+                      <span className="text-xs font-bold text-gray-700 tracking-widest">
+                        {FLOOR_LABELS[topic] ?? topic.toUpperCase()}
+                      </span>
+                    </div>
+                    <span className="text-xs text-gray-400">
+                      {floors[topic].length}
                     </span>
                   </div>
-                  <span className="text-xs text-gray-400">
-                    {floors[topic].length}
-                  </span>
-                </div>
 
-                {/* Posts in this floor */}
-                <div className="divide-y divide-gray-200">
-                  {floors[topic].map((post) => {
-                    const translated = translations[post.id];
-                    const needsTranslation = post.source_lang !== viewerLang;
+                  {/* Posts in this floor */}
+                  <div className="divide-y divide-gray-200">
+                    {floors[topic].map((post) => {
+                      const translated = translations[post.id];
+                      const needsTranslation = post.source_lang !== viewerLang;
 
-                    return (
-                      <div key={post.id} className="px-3 py-3 font-mono text-sm">
-                        <div className="flex items-center gap-2 text-xs text-gray-500 mb-1">
-                          <span className="font-bold text-gray-700">
-                            {post.alias}
-                          </span>
-                          <span className="text-gray-400">
-                            {LANG_NAMES[post.source_lang] ?? post.source_lang}
-                          </span>
-                          <Link
-                            href={`/${post.hood}`}
-                            className="text-gray-400 hover:text-purple-800 underline"
-                          >
-                            {post.hood.replace(/-/g, " ")}
-                          </Link>
+                      return (
+                        <div key={post.id} className="px-3 py-3 font-mono text-sm">
+                          <div className="flex items-center gap-2 text-xs text-gray-500 mb-1">
+                            <span className="font-bold text-gray-700">
+                              {post.alias}
+                            </span>
+                            <span className="text-gray-400">
+                              {LANG_NAMES[post.source_lang] ?? post.source_lang}
+                            </span>
+                            <Link
+                              href={`/${post.hood}`}
+                              className="text-gray-400 hover:text-purple-800 underline"
+                            >
+                              {post.hood.replace(/-/g, " ")}
+                            </Link>
+                          </div>
+                          {needsTranslation && translated ? (
+                            <>
+                              <p className="text-gray-900">{translated}</p>
+                              <p className="text-gray-400 text-xs italic mt-1">{post.body_original}</p>
+                            </>
+                          ) : (
+                            <p className="text-gray-900">{post.body_original}</p>
+                          )}
                         </div>
-                        {needsTranslation && translated ? (
-                          <>
-                            <p className="text-gray-900">{translated}</p>
-                            <p className="text-gray-400 text-xs italic mt-1">{post.body_original}</p>
-                          </>
-                        ) : (
-                          <p className="text-gray-900">{post.body_original}</p>
-                        )}
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             );
           })}
 
-          {/* Foundation */}
-          <div className="bg-purple-800 text-white text-center py-2 text-xs font-mono tracking-widest">
+          {/* Foundation -- full width base of the pyramid */}
+          <div
+            className="bg-purple-800 text-white text-center py-2 text-xs font-mono tracking-widest"
+            style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}
+          >
             FOUNDATION
           </div>
         </div>
