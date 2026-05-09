@@ -1,0 +1,128 @@
+UNBABEL -- 3-MINUTE DEMO SCRIPT
+================================
+
+PRE-DEMO CHECKLIST:
+- Browser open to localhost:3000/jackson-heights
+- Top signal auto-expanded (should happen automatically)
+- Chinese demo text ready to paste (see bottom of this file)
+- Phone field: type any number (e.g. "demo123")
+
+================================
+
+[0:00 - 0:15] HOOK (camera on, no screen share yet)
+
+"My mom found jobs, English classes, and legal help through
+churches -- not just Chinese ones. But she had to walk through
+the door and speak the right language. What if the door was
+already open?"
+
+[0:15 - 0:45] THE SIGNAL (screen share Jackson Heights)
+
+Point to the top signal card (already expanded):
+
+"This is Jackson Heights. 8 reports. 6 languages. Spanish,
+Tagalog, Chinese, Russian, Korean, Bengali. Six communities
+that can't read each other -- all searching for the same
+thing: free English classes. This pattern was invisible
+until they all reported on the same board."
+
+[0:45 - 1:15] THE SCAM (scroll to 37th Ave signal, click expand)
+
+"Here's where it gets interesting. Four languages --
+English, Bengali, Tagalog, Nepali -- all independently
+warning about hidden fees at the same realty office on
+37th Ave. None of these people know each other. None
+can read each other's posts."
+
+Point to the complaint link:
+
+"One click. Pre-filled complaint to NYC 311. Collective
+action from people who never coordinated."
+
+[1:15 - 2:00] LIVE DEMO (paste Chinese post)
+
+"Let me show you this working live."
+
+1. Scroll to report form
+2. Phone field: type "demo123"
+3. Paste: 37号大道的那个房产中介千万别去。签完合同之后加了好多隐藏费用，我朋友也被骗了。
+4. Click "submit report"
+5. Point to the processing receipt (green flash):
+   "One LLM call. Seven tasks. Language detection. Translation.
+   PII stripping. Moderation. Entity extraction. Topic tagging.
+   Cultural context. Not seven API calls -- one structured output."
+6. Refresh the page. Signal now shows 5 languages.
+   "Chinese just joined the signal. The pattern got stronger."
+
+[2:00 - 2:30] THE MOAT
+
+"Reddit aggregates opinions. We aggregate evidence. There's
+no feed. No upvote. No algorithm. You report something, the
+system cross-references it against every language in the
+neighborhood. A pattern exists or it doesn't. This is closer
+to epidemiology than social media."
+
+"You can't fake a cross-language signal. You'd need multiple
+phones, fluency in multiple languages, and the AI would have
+to independently extract matching entities. The cost of
+attacking this system exceeds any single-language platform."
+
+[2:30 - 2:45] SCALE (flash homepage map)
+
+Navigate to homepage. Point to the map.
+
+"12 neighborhoods. 13 languages. 68 reports. Growing.
+Every new language makes every existing signal stronger."
+
+[2:45 - 3:00] CLOSE
+
+"Every other project here builds tools for immigrants to
+interact with systems. We built a tool for immigrants to
+interact with each other. The neighborhood is talking.
+Now everyone on the block hears the same thing."
+
+================================
+
+Q&A CHEAT SHEET:
+
+"Why not WhatsApp?"
+-> WhatsApp groups are walled by language. Bengali group and
+   Mexican group in the same building never cross. We're
+   the only place their signals merge.
+
+"How do you get users?"
+-> One church, one legal clinic. They already have multilingual
+   foot traffic and paper bulletin boards. We digitize what's
+   already happening.
+
+"What about fake reports?"
+-> You can't fake cross-language corroboration. One phone = one
+   alias. You'd need multiple SIMs and fluency in multiple
+   languages.
+
+"Isn't this Reddit?"
+-> Reddit aggregates opinions. We aggregate evidence. No feed,
+   no votes, no algorithm. This is epidemiology, not social media.
+
+"Who pays?"
+-> City agencies subscribe to the signal feed. Tenant advocacy
+   orgs pay for real-time alerts. We never charge immigrants.
+
+"PII / safety?"
+-> Phone hashed client-side, never stored. PII stripped from
+   post text. Posts expire in 7 days. No accounts, no login.
+
+"What does immigrant-aware moderation mean?"
+-> "ICE was at the subway" = safety warning, not threat. We
+   mark it SAFE. Standard moderation would flag it. "Cash job?"
+   = survival, not fraud. Only direct threats/doxxing = UNSAFE.
+
+================================
+
+CHINESE DEMO TEXT (copy-paste this):
+
+37号大道的那个房产中介千万别去。签完合同之后加了好多隐藏费用，我朋友也被骗了。
+
+(Translation for audience: "Don't go to that realty office
+on 37th Ave. They added hidden fees after signing. My friend
+got scammed too.")
