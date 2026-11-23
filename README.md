@@ -12,9 +12,7 @@ A system that detects when isolated immigrant communities independently report t
 
 - Solved a problem we assumed existed instead of validating with actual users first
 - Cross-language entity clustering is technically interesting but not a defensible moat in immigration tech
-- Teammates who don't ship code don't help -- solo or one strong partner next time
 - Spent the last hour polishing translations instead of practicing the pitch
-- Don't default to TypeScript/Next.js scaffolding when the problem doesn't demand it
 
 ## Tech Stack
 
